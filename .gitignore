@@ -1,0 +1,4 @@
+bin/
+obj/
+Configurations/service-account.json
+*.user

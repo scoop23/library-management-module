@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>LibraryManagementSystem</RootNamespace>
+    <AssemblyName>LibraryManagementSystem</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Configurations\service-account.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Configurations\service-account.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Official Firestore SDK (chosen instead of raw REST/HttpClient) -->
+    <PackageReference Include="Google.Cloud.Firestore" Version="3.9.0" />
+    <!-- Used only for uploading book cover images to Firebase Storage (GCS bucket) -->
+    <PackageReference Include="Google.Cloud.Storage.V1" Version="4.10.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Configurations\appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <!-- Place your downloaded Firebase service account key here. Never commit this file. -->
+    <None Update="Configurations\service-account.example.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
