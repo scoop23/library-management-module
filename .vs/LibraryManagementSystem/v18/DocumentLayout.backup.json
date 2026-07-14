@@ -1,0 +1,264 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\sebas\\Downloads\\LibraryManagementSystem\\LibraryManagementSystem\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{8B2C1E10-4B8B-4A6A-9C1E-1A2B3C4D5E6F}|LibraryManagementSystem.csproj|c:\\users\\sebas\\downloads\\librarymanagementsystem\\librarymanagementsystem\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8B2C1E10-4B8B-4A6A-9C1E-1A2B3C4D5E6F}|LibraryManagementSystem.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8B2C1E10-4B8B-4A6A-9C1E-1A2B3C4D5E6F}|LibraryManagementSystem.csproj|c:\\users\\sebas\\downloads\\librarymanagementsystem\\librarymanagementsystem\\models\\book.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8B2C1E10-4B8B-4A6A-9C1E-1A2B3C4D5E6F}|LibraryManagementSystem.csproj|solutionrelative:models\\book.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8B2C1E10-4B8B-4A6A-9C1E-1A2B3C4D5E6F}|LibraryManagementSystem.csproj|c:\\users\\sebas\\downloads\\librarymanagementsystem\\librarymanagementsystem\\firebase\\firebaseconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8B2C1E10-4B8B-4A6A-9C1E-1A2B3C4D5E6F}|LibraryManagementSystem.csproj|solutionrelative:firebase\\firebaseconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8B2C1E10-4B8B-4A6A-9C1E-1A2B3C4D5E6F}|LibraryManagementSystem.csproj|c:\\users\\sebas\\downloads\\librarymanagementsystem\\librarymanagementsystem\\configurations\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{8B2C1E10-4B8B-4A6A-9C1E-1A2B3C4D5E6F}|LibraryManagementSystem.csproj|solutionrelative:configurations\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8B2C1E10-4B8B-4A6A-9C1E-1A2B3C4D5E6F}|LibraryManagementSystem.csproj|c:\\users\\sebas\\downloads\\librarymanagementsystem\\librarymanagementsystem\\configurations\\service-account.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{8B2C1E10-4B8B-4A6A-9C1E-1A2B3C4D5E6F}|LibraryManagementSystem.csproj|solutionrelative:configurations\\service-account.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8B2C1E10-4B8B-4A6A-9C1E-1A2B3C4D5E6F}|LibraryManagementSystem.csproj|c:\\users\\sebas\\downloads\\librarymanagementsystem\\librarymanagementsystem\\models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8B2C1E10-4B8B-4A6A-9C1E-1A2B3C4D5E6F}|LibraryManagementSystem.csproj|solutionrelative:models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8B2C1E10-4B8B-4A6A-9C1E-1A2B3C4D5E6F}|LibraryManagementSystem.csproj|c:\\users\\sebas\\downloads\\librarymanagementsystem\\librarymanagementsystem\\models\\bookcopy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8B2C1E10-4B8B-4A6A-9C1E-1A2B3C4D5E6F}|LibraryManagementSystem.csproj|solutionrelative:models\\bookcopy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8B2C1E10-4B8B-4A6A-9C1E-1A2B3C4D5E6F}|LibraryManagementSystem.csproj|c:\\users\\sebas\\downloads\\librarymanagementsystem\\librarymanagementsystem\\services\\bookservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8B2C1E10-4B8B-4A6A-9C1E-1A2B3C4D5E6F}|LibraryManagementSystem.csproj|solutionrelative:services\\bookservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8B2C1E10-4B8B-4A6A-9C1E-1A2B3C4D5E6F}|LibraryManagementSystem.csproj|c:\\users\\sebas\\downloads\\librarymanagementsystem\\librarymanagementsystem\\forms\\bookdetailsform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8B2C1E10-4B8B-4A6A-9C1E-1A2B3C4D5E6F}|LibraryManagementSystem.csproj|solutionrelative:forms\\bookdetailsform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8B2C1E10-4B8B-4A6A-9C1E-1A2B3C4D5E6F}|LibraryManagementSystem.csproj|c:\\users\\sebas\\downloads\\librarymanagementsystem\\librarymanagementsystem\\forms\\booksform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8B2C1E10-4B8B-4A6A-9C1E-1A2B3C4D5E6F}|LibraryManagementSystem.csproj|solutionrelative:forms\\booksform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8B2C1E10-4B8B-4A6A-9C1E-1A2B3C4D5E6F}|LibraryManagementSystem.csproj|C:\\Users\\sebas\\Downloads\\LibraryManagementSystem\\LibraryManagementSystem\\forms\\bookdetailsform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{8B2C1E10-4B8B-4A6A-9C1E-1A2B3C4D5E6F}|LibraryManagementSystem.csproj|solutionrelative:forms\\bookdetailsform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8B2C1E10-4B8B-4A6A-9C1E-1A2B3C4D5E6F}|LibraryManagementSystem.csproj|C:\\Users\\sebas\\Downloads\\LibraryManagementSystem\\LibraryManagementSystem\\forms\\bookcopiesform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{8B2C1E10-4B8B-4A6A-9C1E-1A2B3C4D5E6F}|LibraryManagementSystem.csproj|solutionrelative:forms\\bookcopiesform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8B2C1E10-4B8B-4A6A-9C1E-1A2B3C4D5E6F}|LibraryManagementSystem.csproj|c:\\users\\sebas\\downloads\\librarymanagementsystem\\librarymanagementsystem\\forms\\bookcopiesform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8B2C1E10-4B8B-4A6A-9C1E-1A2B3C4D5E6F}|LibraryManagementSystem.csproj|solutionrelative:forms\\bookcopiesform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8B2C1E10-4B8B-4A6A-9C1E-1A2B3C4D5E6F}|LibraryManagementSystem.csproj|c:\\users\\sebas\\downloads\\librarymanagementsystem\\librarymanagementsystem\\librarymanagementsystem.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{8B2C1E10-4B8B-4A6A-9C1E-1A2B3C4D5E6F}|LibraryManagementSystem.csproj|solutionrelative:librarymanagementsystem.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\sebas\\Downloads\\LibraryManagementSystem\\LibraryManagementSystem\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\sebas\\Downloads\\LibraryManagementSystem\\LibraryManagementSystem\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-14T06:04:42.174Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "FirebaseConfig.cs",
+              "DocumentMoniker": "C:\\Users\\sebas\\Downloads\\LibraryManagementSystem\\LibraryManagementSystem\\Firebase\\FirebaseConfig.cs",
+              "RelativeDocumentMoniker": "Firebase\\FirebaseConfig.cs",
+              "ToolTip": "C:\\Users\\sebas\\Downloads\\LibraryManagementSystem\\LibraryManagementSystem\\Firebase\\FirebaseConfig.cs",
+              "RelativeToolTip": "Firebase\\FirebaseConfig.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAiwBcAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-14T06:03:40.582Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\sebas\\Downloads\\LibraryManagementSystem\\LibraryManagementSystem\\Configurations\\appsettings.json",
+              "RelativeDocumentMoniker": "Configurations\\appsettings.json",
+              "ToolTip": "C:\\Users\\sebas\\Downloads\\LibraryManagementSystem\\LibraryManagementSystem\\Configurations\\appsettings.json",
+              "RelativeToolTip": "Configurations\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-07-14T06:00:18.288Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "BookService.cs",
+              "DocumentMoniker": "C:\\Users\\sebas\\Downloads\\LibraryManagementSystem\\LibraryManagementSystem\\Services\\BookService.cs",
+              "RelativeDocumentMoniker": "Services\\BookService.cs",
+              "ToolTip": "C:\\Users\\sebas\\Downloads\\LibraryManagementSystem\\LibraryManagementSystem\\Services\\BookService.cs",
+              "RelativeToolTip": "Services\\BookService.cs",
+              "ViewState": "AgIAAEEAAAAAAAAAAAAAwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-14T05:58:57.014Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Category.cs",
+              "DocumentMoniker": "C:\\Users\\sebas\\Downloads\\LibraryManagementSystem\\LibraryManagementSystem\\Models\\Category.cs",
+              "RelativeDocumentMoniker": "Models\\Category.cs",
+              "ToolTip": "C:\\Users\\sebas\\Downloads\\LibraryManagementSystem\\LibraryManagementSystem\\Models\\Category.cs",
+              "RelativeToolTip": "Models\\Category.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-14T05:08:08.847Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "BookCopy.cs",
+              "DocumentMoniker": "C:\\Users\\sebas\\Downloads\\LibraryManagementSystem\\LibraryManagementSystem\\Models\\BookCopy.cs",
+              "RelativeDocumentMoniker": "Models\\BookCopy.cs",
+              "ToolTip": "C:\\Users\\sebas\\Downloads\\LibraryManagementSystem\\LibraryManagementSystem\\Models\\BookCopy.cs",
+              "RelativeToolTip": "Models\\BookCopy.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-14T05:08:07.268Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Book.cs",
+              "DocumentMoniker": "C:\\Users\\sebas\\Downloads\\LibraryManagementSystem\\LibraryManagementSystem\\Models\\Book.cs",
+              "RelativeDocumentMoniker": "Models\\Book.cs",
+              "ToolTip": "C:\\Users\\sebas\\Downloads\\LibraryManagementSystem\\LibraryManagementSystem\\Models\\Book.cs",
+              "RelativeToolTip": "Models\\Book.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-14T05:08:02.44Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "service-account.json",
+              "DocumentMoniker": "C:\\Users\\sebas\\Downloads\\LibraryManagementSystem\\LibraryManagementSystem\\Configurations\\service-account.json",
+              "RelativeDocumentMoniker": "Configurations\\service-account.json",
+              "ToolTip": "C:\\Users\\sebas\\Downloads\\LibraryManagementSystem\\LibraryManagementSystem\\Configurations\\service-account.json",
+              "RelativeToolTip": "Configurations\\service-account.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-07-14T05:02:15.221Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "BookDetailsForm.cs",
+              "DocumentMoniker": "C:\\Users\\sebas\\Downloads\\LibraryManagementSystem\\LibraryManagementSystem\\Forms\\BookDetailsForm.cs",
+              "RelativeDocumentMoniker": "Forms\\BookDetailsForm.cs",
+              "ToolTip": "C:\\Users\\sebas\\Downloads\\LibraryManagementSystem\\LibraryManagementSystem\\Forms\\BookDetailsForm.cs",
+              "RelativeToolTip": "Forms\\BookDetailsForm.cs",
+              "ViewState": "AgIAAGAAAAAAAAAAAAAowCkAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-10T07:21:44.457Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "BookDetailsForm.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\sebas\\Downloads\\LibraryManagementSystem\\LibraryManagementSystem\\Forms\\BookDetailsForm.cs",
+              "RelativeDocumentMoniker": "Forms\\BookDetailsForm.cs",
+              "ToolTip": "C:\\Users\\sebas\\Downloads\\LibraryManagementSystem\\LibraryManagementSystem\\Forms\\BookDetailsForm.cs [Design]",
+              "RelativeToolTip": "Forms\\BookDetailsForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-10T07:21:42.736Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "BooksForm.cs",
+              "DocumentMoniker": "C:\\Users\\sebas\\Downloads\\LibraryManagementSystem\\LibraryManagementSystem\\Forms\\BooksForm.cs",
+              "RelativeDocumentMoniker": "Forms\\BooksForm.cs",
+              "ToolTip": "C:\\Users\\sebas\\Downloads\\LibraryManagementSystem\\LibraryManagementSystem\\Forms\\BooksForm.cs",
+              "RelativeToolTip": "Forms\\BooksForm.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACcAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-10T06:53:36.833Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "BookCopiesForm.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\sebas\\Downloads\\LibraryManagementSystem\\LibraryManagementSystem\\Forms\\BookCopiesForm.cs",
+              "RelativeDocumentMoniker": "Forms\\BookCopiesForm.cs",
+              "ToolTip": "C:\\Users\\sebas\\Downloads\\LibraryManagementSystem\\LibraryManagementSystem\\Forms\\BookCopiesForm.cs [Design]",
+              "RelativeToolTip": "Forms\\BookCopiesForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-10T06:53:20.241Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "BookCopiesForm.cs",
+              "DocumentMoniker": "C:\\Users\\sebas\\Downloads\\LibraryManagementSystem\\LibraryManagementSystem\\Forms\\BookCopiesForm.cs",
+              "RelativeDocumentMoniker": "Forms\\BookCopiesForm.cs",
+              "ToolTip": "C:\\Users\\sebas\\Downloads\\LibraryManagementSystem\\LibraryManagementSystem\\Forms\\BookCopiesForm.cs",
+              "RelativeToolTip": "Forms\\BookCopiesForm.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAcAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-10T06:53:23.366Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "LibraryManagementSystem.csproj",
+              "DocumentMoniker": "C:\\Users\\sebas\\Downloads\\LibraryManagementSystem\\LibraryManagementSystem\\LibraryManagementSystem.csproj",
+              "RelativeDocumentMoniker": "LibraryManagementSystem.csproj",
+              "ToolTip": "C:\\Users\\sebas\\Downloads\\LibraryManagementSystem\\LibraryManagementSystem\\LibraryManagementSystem.csproj",
+              "RelativeToolTip": "LibraryManagementSystem.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-07-10T06:53:13.795Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

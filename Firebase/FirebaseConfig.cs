@@ -20,6 +20,8 @@ namespace LibraryManagementSystem.Firebase
         {
             ProjectId = projectId;
             CredentialsPath = credentialsPath;
+
+            _firestoreDb = null;
         }
 
         public static FirestoreDb GetFirestoreDb()

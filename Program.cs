@@ -10,11 +10,13 @@ namespace LibraryManagementSystem
         {
             ApplicationConfiguration.Initialize();
 
+
             // TODO: move these into Configurations/appsettings.json loading if you
             // want them configurable without recompiling.
             FirebaseConfig.Initialize(
-                projectId: "library-management-9cf74",
+                projectId: "lib-management-715aa",
                 credentialsPath: Path.Combine(AppContext.BaseDirectory, "Configurations", "service-account.json"));
+
 
             Application.Run(new BooksForm());
         }

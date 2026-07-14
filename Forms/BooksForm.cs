@@ -16,10 +16,10 @@ namespace LibraryManagementSystem.Forms
         private Button btnSearch, btnAdd, btnEdit, btnDelete, btnArchive, btnCopies, btnRefresh, btnCategories;
         private Label lblTitle;
 
-        public BooksForm()
+        public BooksForm()  
         {
             InitializeComponent();
-            Load += BookForms_Load;
+            Load += BookForms_Load; 
         }
 
         private void InitializeComponent()
@@ -44,7 +44,7 @@ namespace LibraryManagementSystem.Forms
             btnSearch = new Button { Text = "Search", Location = new Point(270, 53), Width = 80, BackColor = Color.FromArgb(21, 67, 140), ForeColor = Color.White, FlatStyle = FlatStyle.Flat };
             btnSearch.Click += BtnSearch_Click;
 
-            cmbCategory = new ComboBox { Location = new Point(360, 55), Width = 190, DropDownStyle = ComboBoxStyle.DropDownList, DisplayMember = "Name", ValueMember = "CategoryId" };
+            cmbCategory = new ComboBox { Location = new Point(360, 53), Width = 190, DropDownStyle = ComboBoxStyle.DropDownList, DisplayMember = "Name", ValueMember = "CategoryId" };
             cmbCategory.SelectedIndexChanged += SelectIndex_Changed;
 
             btnRefresh = new Button { Text = "Refresh", Location = new Point(560, 53), Width = 80, FlatStyle = FlatStyle.Flat };
