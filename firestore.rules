@@ -22,8 +22,21 @@ service cloud.firestore {
         request.auth.token.role == 'Administrator';
     }
 
+    // Students are managed by the external Student Management System API;
+    // the library app only reads them, never writes to Firestore directly.
+    match /Students/{studentId} {
+      allow read: if request.auth != null;
+      allow write: if false;
+    }
+
+    match /Borrows/{borrowId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null &&
+        request.auth.token.role in ['Administrator', 'Librarian'];
+    }
+
     // Deny everything else by default until the remaining modules
-    // (Borrowing, Reservations, Fines, Settings, AuditLogs) are integrated.
+    // (Reservations, Fines, Settings, AuditLogs) are integrated.
     match /{document=**} {
       allow read, write: if false;
     }

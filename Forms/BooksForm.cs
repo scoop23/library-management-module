@@ -13,7 +13,7 @@ namespace LibraryManagementSystem.Forms
         private DataGridView dgvBooks;
         private TextBox txtSearch;
         private ComboBox cmbCategory;
-        private Button btnSearch, btnAdd, btnEdit, btnDelete, btnArchive, btnCopies, btnRefresh, btnCategories;
+        private Button btnSearch, btnAdd, btnEdit, btnDelete, btnArchive, btnCopies, btnRefresh, btnCategories, btnBorrow, btnReturn, btnClearance;
         private Label lblTitle;
 
         public BooksForm()  
@@ -62,6 +62,15 @@ namespace LibraryManagementSystem.Forms
             btnCategories = new Button { Text = "Categories...", Location = new Point(20, 550), Width = 110, FlatStyle = FlatStyle.Flat };
             btnCategories.Click += BtnCategories_Click;
 
+            btnBorrow = new Button { Text = "Borrow Book", Location = new Point(300, 550), Width = 120, BackColor = Color.FromArgb(46, 139, 87), ForeColor = Color.White, FlatStyle = FlatStyle.Flat };
+            btnBorrow.Click += BtnBorrow_Click;
+
+            btnReturn = new Button { Text = "Return Book", Location = new Point(430, 550), Width = 120, BackColor = Color.FromArgb(21, 67, 140), ForeColor = Color.White, FlatStyle = FlatStyle.Flat };
+            btnReturn.Click += BtnReturn_Click;
+
+            btnClearance = new Button { Text = "Clearance", Location = new Point(560, 550), Width = 110, FlatStyle = FlatStyle.Flat };
+            btnClearance.Click += BtnClearance_Click;
+
             dgvBooks = new DataGridView
             {
                 Location = new Point(20, 95),
@@ -85,7 +94,7 @@ namespace LibraryManagementSystem.Forms
             Controls.AddRange(new Control[]
             {
                 lblTitle, txtSearch, btnSearch, cmbCategory, btnRefresh, btnAdd, btnEdit, btnCopies,
-                dgvBooks, btnArchive, btnDelete, btnCategories
+                dgvBooks, btnArchive, btnDelete, btnCategories, btnBorrow, btnReturn, btnClearance
             });
         }
 
@@ -236,6 +245,27 @@ namespace LibraryManagementSystem.Forms
         {
             await DeleteSelectedAsync();
         }
+
+        private void BtnBorrow_Click(object sender, EventArgs e)
+        {
+            using var form = new BorrowForm();
+            form.ShowDialog(this);
+            _ = LoadBooksAsync();
+        }
+
+        private void BtnReturn_Click(object sender, EventArgs e)
+        {
+            using var form = new ReturnForm();
+            form.ShowDialog(this);
+            _ = LoadBooksAsync();
+        }
+
+        private void BtnClearance_Click(object sender, EventArgs e)
+        {
+            using var form = new ClearanceForm();
+            form.ShowDialog(this);
+        }
+
         private async void BookForms_Load(object sender, EventArgs e)
         {
             await LoadCategoriesAsync();
