@@ -1,3 +1,4 @@
+using Firebase.Database.Query;
 using LibraryManagementSystem.Models;
 
 namespace LibraryManagementSystem.Repositories
@@ -8,8 +9,16 @@ namespace LibraryManagementSystem.Repositories
 
         public async Task<List<BookCopy>> GetByBookIdAsync(string bookId)
         {
-            var snapshot = await Collection.WhereEqualTo("BookId", bookId).GetSnapshotAsync();
-            return snapshot.Documents.Select(d => d.ConvertTo<BookCopy>()).ToList();
+            var records = await Client.Child(CollectionName)
+                .OrderBy("BookId")
+                .EqualTo(bookId)
+                .OnceAsync<BookCopy>();
+
+            return records.Select(r =>
+            {
+                r.Object.CopyId = r.Key;
+                return r.Object;
+            }).ToList();
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System.Text.Json;
 using Firebase.Database;
 using Firebase.Database.Query;
-using Google.Apis.Auth.OAuth2;
 using LibraryManagementSystem.Models;
 
 namespace LibraryManagementSystem.Services
@@ -18,22 +17,11 @@ namespace LibraryManagementSystem.Services
             var config = JsonSerializer.Deserialize<JsonElement>(configJson);
 
             var rtdbUrl = config.GetProperty("FirebaseRealtime").GetProperty("DatabaseUrl").GetString();
-            var credentialsPath = config.GetProperty("FirebaseRealtime").GetProperty("CredentialsPath").GetString();
-
-            var fullPath = Path.Combine(AppContext.BaseDirectory, credentialsPath);
-
-            if (!File.Exists(fullPath))
-                throw new FileNotFoundException($"it332 service account not found at '{fullPath}'.");
-
-            var credential = GoogleCredential.FromFile(fullPath)
-                .CreateScoped("https://www.googleapis.com/auth/firebase.database");
-
-            var accessToken = credential.UnderlyingCredential
-                .GetAccessTokenForRequestAsync().GetAwaiter().GetResult();
+            var secret = config.GetProperty("FirebaseRealtime").GetProperty("DatabaseSecret").GetString();
 
             _firebaseClient = new FirebaseClient(rtdbUrl, new FirebaseOptions
             {
-                AuthTokenAsyncFactory = () => Task.FromResult(accessToken),
+                AuthTokenAsyncFactory = () => Task.FromResult(secret),
                 AsAccessToken = false
             });
         }

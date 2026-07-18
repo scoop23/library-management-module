@@ -1,4 +1,3 @@
-using Google.Cloud.Firestore;
 using LibraryManagementSystem.Models;
 using LibraryManagementSystem.Repositories;
 
@@ -33,8 +32,8 @@ namespace LibraryManagementSystem.Services
 
             book.AvailableCopies = book.TotalCopies;
             book.Status = "Available";
-            book.CreatedAt = Timestamp.GetCurrentTimestamp();
-            book.UpdatedAt = Timestamp.GetCurrentTimestamp();
+            book.CreatedAt = DateTime.UtcNow;
+            book.UpdatedAt = DateTime.UtcNow;
 
             return await _bookRepository.AddAsync(book);
         }
@@ -47,7 +46,7 @@ namespace LibraryManagementSystem.Services
             if (existing != null && existing.BookId != book.BookId)
                 throw new InvalidOperationException($"Another book already uses ISBN '{book.ISBN}'.");
 
-            book.UpdatedAt = Timestamp.GetCurrentTimestamp();
+            book.UpdatedAt = DateTime.UtcNow;
             await _bookRepository.UpdateAsync(book.BookId, book);
         }
 
@@ -70,7 +69,7 @@ namespace LibraryManagementSystem.Services
                 ?? throw new InvalidOperationException("Book not found.");
 
             book.Status = "Archived";
-            book.UpdatedAt = Timestamp.GetCurrentTimestamp();
+            book.UpdatedAt = DateTime.UtcNow;
             await _bookRepository.UpdateAsync(bookId, book);
         }
 

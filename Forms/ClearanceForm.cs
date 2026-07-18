@@ -162,8 +162,8 @@ namespace LibraryManagementSystem.Forms
                     .Select(b => new
                     {
                         b.BookTitle,
-                        BorrowDate = b.BorrowDate.ToDateTime().ToString("yyyy-MM-dd"),
-                        DueDate = b.DueDate.ToDateTime().ToString("yyyy-MM-dd"),
+                        BorrowDate = b.BorrowDate.ToString("yyyy-MM-dd"),
+                        DueDate = b.DueDate.ToString("yyyy-MM-dd"),
                         b.Status
                     })
                     .ToList();

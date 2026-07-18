@@ -1,4 +1,3 @@
-using Google.Cloud.Firestore;
 using LibraryManagementSystem.Models;
 using LibraryManagementSystem.Repositories;
 
@@ -23,7 +22,7 @@ namespace LibraryManagementSystem.Services
                 throw new ArgumentException("BookId is required.");
 
             copy.Status = "Available";
-            copy.CreatedAt = Timestamp.GetCurrentTimestamp();
+            copy.CreatedAt = DateTime.UtcNow;
 
             var id = await _copyRepository.AddAsync(copy);
 
@@ -32,7 +31,7 @@ namespace LibraryManagementSystem.Services
             {
                 book.TotalCopies += 1;
                 book.AvailableCopies += 1;
-                book.UpdatedAt = Timestamp.GetCurrentTimestamp();
+                book.UpdatedAt = DateTime.UtcNow;
                 await _bookRepository.UpdateAsync(book.BookId, book);
             }
 
@@ -61,7 +60,7 @@ namespace LibraryManagementSystem.Services
                 book.TotalCopies = Math.Max(0, book.TotalCopies - 1);
                 if (copy != null && copy.Status == "Available")
                     book.AvailableCopies = Math.Max(0, book.AvailableCopies - 1);
-                book.UpdatedAt = Timestamp.GetCurrentTimestamp();
+                book.UpdatedAt = DateTime.UtcNow;
                 await _bookRepository.UpdateAsync(book.BookId, book);
             }
         }

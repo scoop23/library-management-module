@@ -1,4 +1,3 @@
-using Google.Cloud.Firestore;
 using LibraryManagementSystem.Models;
 using LibraryManagementSystem.Repositories;
 
@@ -59,7 +58,7 @@ namespace LibraryManagementSystem.Services
             if (activeBorrows.Count >= MaxBorrowsPerStudent)
                 throw new InvalidOperationException($"Student has reached the maximum of {MaxBorrowsPerStudent} active borrows.");
 
-            var now = Timestamp.GetCurrentTimestamp();
+            var now = DateTime.UtcNow;
             var borrow = new Borrow
             {
                 StudentId = studentId,
@@ -68,7 +67,7 @@ namespace LibraryManagementSystem.Services
                 BookTitle = book.Title,
                 CopyId = copyId,
                 BorrowDate = now,
-                DueDate = Timestamp.FromDateTime(now.ToDateTime().AddDays(DefaultBorrowDays)),
+                DueDate = now.AddDays(DefaultBorrowDays),
                 Status = "Borrowed",
                 CreatedAt = now,
                 UpdatedAt = now
@@ -94,7 +93,7 @@ namespace LibraryManagementSystem.Services
             if (borrow.Status == "Returned")
                 throw new InvalidOperationException("This book has already been returned.");
 
-            var now = Timestamp.GetCurrentTimestamp();
+            var now = DateTime.UtcNow;
 
             borrow.ReturnDate = now;
             borrow.Status = "Returned";
@@ -125,7 +124,7 @@ namespace LibraryManagementSystem.Services
             if (borrow.Status == "Returned")
                 throw new InvalidOperationException("Cannot mark a returned book as lost.");
 
-            var now = Timestamp.GetCurrentTimestamp();
+            var now = DateTime.UtcNow;
 
             borrow.Status = "Lost";
             borrow.UpdatedAt = now;

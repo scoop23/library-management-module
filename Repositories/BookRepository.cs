@@ -1,3 +1,4 @@
+using Firebase.Database.Query;
 using LibraryManagementSystem.Models;
 
 namespace LibraryManagementSystem.Repositories
@@ -6,27 +7,40 @@ namespace LibraryManagementSystem.Repositories
     {
         public BookRepository() : base("Books") { }
 
-        /// <summary>Prefix search on Title (Firestore range-query trick).</summary>
         public async Task<List<Book>> SearchByTitleAsync(string keyword)
         {
-            var snapshot = await Collection
-                .WhereGreaterThanOrEqualTo("Title", keyword)
-                .WhereLessThanOrEqualTo("Title", keyword + "\uf8ff")
-                .GetSnapshotAsync();
-
-            return snapshot.Documents.Select(d => d.ConvertTo<Book>()).ToList();
+            var all = await GetAllAsync();
+            return all.Where(b => b.Title != null &&
+                b.Title.StartsWith(keyword, StringComparison.OrdinalIgnoreCase)).ToList();
         }
 
         public async Task<List<Book>> GetByCategoryAsync(string categoryId)
         {
-            var snapshot = await Collection.WhereEqualTo("CategoryId", categoryId).GetSnapshotAsync();
-            return snapshot.Documents.Select(d => d.ConvertTo<Book>()).ToList();
+            var records = await Client.Child(CollectionName)
+                .OrderBy("CategoryId")
+                .EqualTo(categoryId)
+                .OnceAsync<Book>();
+
+            return records.Select(r =>
+            {
+                r.Object.BookId = r.Key;
+                return r.Object;
+            }).ToList();
         }
 
         public async Task<Book> GetByIsbnAsync(string isbn)
         {
-            var snapshot = await Collection.WhereEqualTo("ISBN", isbn).Limit(1).GetSnapshotAsync();
-            return snapshot.Documents.Count > 0 ? snapshot.Documents[0].ConvertTo<Book>() : null;
+            var records = await Client.Child(CollectionName)
+                .OrderBy("ISBN")
+                .EqualTo(isbn)
+                .LimitToFirst(1)
+                .OnceAsync<Book>();
+
+            var match = records.FirstOrDefault();
+            if (match != null)
+                match.Object.BookId = match.Key;
+
+            return match?.Object;
         }
     }
 }

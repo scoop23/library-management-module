@@ -1,50 +1,74 @@
-using Google.Cloud.Firestore;
-using LibraryManagementSystem.Firebase;
+using System.Text.Json;
+using Firebase.Database;
+using Firebase.Database.Query;
 
 namespace LibraryManagementSystem.Repositories
 {
-    /// <summary>
-    /// Generic Firestore CRUD repository. Concrete repositories (BookRepository,
-    /// BookCopyRepository, CategoryRepository, ...) derive from this and add
-    /// collection-specific queries.
-    /// </summary>
     public class FirebaseRepository<T> : IFirebaseRepository<T> where T : class
     {
-        protected readonly FirestoreDb Db;
-        protected readonly CollectionReference Collection;
+        protected static FirebaseClient Client;
+        protected readonly string CollectionName;
 
         public FirebaseRepository(string collectionName)
         {
-            Db = FirebaseConfig.GetFirestoreDb();
-            Collection = Db.Collection(collectionName);
+            CollectionName = collectionName;
+
+            if (Client == null)
+            {
+                var configPath = Path.Combine(AppContext.BaseDirectory, "Configurations", "appsettings.json");
+                var configJson = File.ReadAllText(configPath);
+                var config = JsonSerializer.Deserialize<JsonElement>(configJson);
+
+                var rtdbUrl = config.GetProperty("FirebaseRealtime").GetProperty("DatabaseUrl").GetString();
+                var secret = config.GetProperty("FirebaseRealtime").GetProperty("DatabaseSecret").GetString();
+
+                Client = new FirebaseClient(rtdbUrl, new FirebaseOptions
+                {
+                    AuthTokenAsyncFactory = () => Task.FromResult(secret),
+                    AsAccessToken = false
+                });
+            }
         }
 
         public virtual async Task<T> GetByIdAsync(string id)
         {
-            var snapshot = await Collection.Document(id).GetSnapshotAsync();
-            return snapshot.Exists ? snapshot.ConvertTo<T>() : null;
+            var result = await Client.Child(CollectionName).Child(id).OnceSingleAsync<T>();
+            return result;
         }
 
         public virtual async Task<List<T>> GetAllAsync()
         {
-            var snapshot = await Collection.GetSnapshotAsync();
-            return snapshot.Documents.Select(d => d.ConvertTo<T>()).ToList();
+            var records = await Client.Child(CollectionName).OnceAsync<T>();
+            return records.Select(r =>
+            {
+                var obj = r.Object;
+                var idProp = typeof(T).GetProperty("BookId")
+                    ?? typeof(T).GetProperty("CopyId")
+                    ?? typeof(T).GetProperty("CategoryId")
+                    ?? typeof(T).GetProperty("BorrowId")
+                    ?? typeof(T).GetProperty("StudentId");
+
+                if (idProp != null && idProp.CanWrite)
+                    idProp.SetValue(obj, r.Key);
+
+                return obj;
+            }).ToList();
         }
 
         public virtual async Task<string> AddAsync(T entity)
         {
-            var docRef = await Collection.AddAsync(entity);
-            return docRef.Id;
+            var result = await Client.Child(CollectionName).PostAsync(entity);
+            return result.Key;
         }
 
         public virtual async Task UpdateAsync(string id, T entity)
         {
-            await Collection.Document(id).SetAsync(entity, SetOptions.Overwrite);
+            await Client.Child(CollectionName).Child(id).PutAsync(entity);
         }
 
         public virtual async Task DeleteAsync(string id)
         {
-            await Collection.Document(id).DeleteAsync();
+            await Client.Child(CollectionName).Child(id).DeleteAsync();
         }
     }
 }
