@@ -8,7 +8,7 @@ namespace LibraryManagementSystem.Forms
     public class BorrowForm : Form
     {
         private readonly BorrowService _borrowService = new();
-        private readonly ExternalStudentService _studentService = new();
+        private readonly InternalStudentService _studentService = new();
         private readonly BookService _bookService = new();
         private readonly BookCopyService _copyService = new();
 
@@ -135,20 +135,24 @@ namespace LibraryManagementSystem.Forms
             try
             {
                 var students = !string.IsNullOrWhiteSpace(keyword)
-                    ? await _studentService.SearchStudentsAsync(keyword)
+                    ? await _studentService.SearchStudentAsync(keyword)
                     : await _studentService.GetAllStudentsAsync();
 
-                dgvStudents.DataSource = students
+                var active = students
                     .Where(s => s.Status == "Active")
-                    .Select(s => new { s.StudentId, s.StudentNumber, s.FullName, s.Department, s.YearLevel, s.Status })
+                    .Select(s => new { s.StudentId, s.FirstName, s.LastName, s.YearLevel, s.ContactNumber })
                     .ToList();
 
-                if (dgvStudents.Columns["StudentId"] != null)
-                    dgvStudents.Columns["StudentId"].Visible = false;
+                dgvStudents.DataSource = active;
+
+                if (dgvStudents.Columns["StudentId"] != null) dgvStudents.Columns["StudentId"].Visible = false;
+
+                if (active.Count == 0)
+                    MessageBox.Show($"No students found{(string.IsNullOrWhiteSpace(keyword) ? "" : $" matching '{keyword}'")}. Total from RTDB: {students.Count}", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Failed to load students: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Failed to load students:\n{ex.Message}\n\n{ex.InnerException?.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -205,8 +209,8 @@ namespace LibraryManagementSystem.Forms
             }
             var row = dgvStudents.SelectedRows[0];
             _selectedStudentId = row.Cells["StudentId"].Value?.ToString();
-            _selectedStudentName = row.Cells["FullName"].Value?.ToString();
-            lblSelectedStudent.Text = $"Selected: {_selectedStudentName} ({row.Cells["StudentNumber"].Value})";
+            _selectedStudentName = $"{row.Cells["FirstName"].Value} {row.Cells["LastName"].Value}";
+            lblSelectedStudent.Text = $"Selected: {_selectedStudentName}";
             UpdateBorrowButton();
         }
 

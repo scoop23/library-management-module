@@ -1,4 +1,6 @@
 bin/
 obj/
+Configurations/it332-service-account.json
 Configurations/service-account.json
 *.user
+.vs/

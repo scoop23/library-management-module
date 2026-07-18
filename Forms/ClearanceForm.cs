@@ -9,7 +9,7 @@ namespace LibraryManagementSystem.Forms
     public class ClearanceForm : Form
     {
         private readonly BorrowService _borrowService = new();
-        private readonly ExternalStudentService _studentService = new();
+        private readonly InternalStudentService _studentService = new();
 
         private TextBox txtStudentNumber;
         private Button btnCheck, btnPrint, btnClose;
@@ -131,8 +131,9 @@ namespace LibraryManagementSystem.Forms
                 var activeBorrows = await _borrowService.GetActiveBorrowsByStudentAsync(student.StudentId);
 
                 pnlResult.Visible = true;
-                lblStudentInfo.Text = $"Student: {student.FullName}\n" +
-                                      $"Number: {student.StudentNumber}  |  Dept: {student.Department}  |  Year: {student.YearLevel}\n" +
+                lblStudentInfo.Text = $"Student: {student.LastName}, {student.FirstName}\n" +
+                                      $"SrCode: {student.StudentId}  | Year: {student.YearLevel}\n" +
+                                      //$"SrCode: {student.StudentId}  |  Dept: {student.Department}  |  Year: {student.YearLevel}\n" +
                                       $"Email: {student.Email}  |  Status: {student.Status}";
 
                 if (activeBorrows.Count == 0 && student.Status == "Active")

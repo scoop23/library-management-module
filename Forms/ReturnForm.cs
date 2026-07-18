@@ -8,7 +8,7 @@ namespace LibraryManagementSystem.Forms
     public class ReturnForm : Form
     {
         private readonly BorrowService _borrowService = new();
-        private readonly ExternalStudentService _studentService = new();
+        private readonly InternalStudentService _studentService = new();
 
         private DataGridView dgvBorrows;
         private TextBox txtStudentSearch;
@@ -106,7 +106,7 @@ namespace LibraryManagementSystem.Forms
                 List<Borrow> borrows;
                 if (!string.IsNullOrWhiteSpace(studentNameFilter))
                 {
-                    var students = await _studentService.SearchStudentsAsync(studentNameFilter);
+                    var students = await _studentService.SearchStudentAsync(studentNameFilter);
                     var studentIds = students.Select(s => s.StudentId).ToList();
                     borrows = new List<Borrow>();
                     foreach (var sid in studentIds)

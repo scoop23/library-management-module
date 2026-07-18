@@ -24,7 +24,7 @@ namespace LibraryManagementSystem.Forms
 
         private void InitializeComponent()
         {
-            Text = "Book Management";
+            Text = "Library Management";
             Width = 1020;
             Height = 620;
             BackColor = Color.White;
@@ -32,7 +32,7 @@ namespace LibraryManagementSystem.Forms
 
             lblTitle = new Label
             {
-                Text = "Book Management",
+                Text = "Library Management",
                 Font = new Font("Segoe UI", 16, FontStyle.Bold),
                 ForeColor = Color.FromArgb(21, 67, 140),
                 Location = new Point(20, 15),

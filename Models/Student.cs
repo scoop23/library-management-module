@@ -14,8 +14,13 @@ namespace LibraryManagementSystem.Models
         [FirestoreProperty]
         public string StudentNumber { get; set; }
 
+        //[FirestoreProperty]
+        //public string FullName { get; set; }
         [FirestoreProperty]
-        public string FullName { get; set; }
+        public string FirstName { get; set; }
+
+        [FirestoreProperty]
+        public string LastName { get; set; }
 
         [FirestoreProperty]
         public string Email { get; set; }
@@ -25,6 +30,12 @@ namespace LibraryManagementSystem.Models
 
         [FirestoreProperty]
         public int YearLevel { get; set; }
+
+        [FirestoreProperty]
+        public string ContactNumber { get; set; }
+
+        [FirestoreProperty]
+        public string BirthDate { get; set; }
 
         [FirestoreProperty]
         public string Status { get; set; } = "Active";

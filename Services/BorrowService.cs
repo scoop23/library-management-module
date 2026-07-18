@@ -7,7 +7,7 @@ namespace LibraryManagementSystem.Services
     public class BorrowService
     {
         private readonly BorrowRepository _borrowRepository;
-        private readonly ExternalStudentService _studentService;
+        private readonly InternalStudentService _studentService;
         private readonly BookRepository _bookRepository;
         private readonly BookCopyRepository _copyRepository;
 
@@ -17,7 +17,7 @@ namespace LibraryManagementSystem.Services
         public BorrowService()
         {
             _borrowRepository = new BorrowRepository();
-            _studentService = new ExternalStudentService();
+            _studentService = new InternalStudentService();
             _bookRepository = new BookRepository();
             _copyRepository = new BookCopyRepository();
         }
@@ -63,7 +63,7 @@ namespace LibraryManagementSystem.Services
             var borrow = new Borrow
             {
                 StudentId = studentId,
-                StudentName = student.FullName,
+                StudentName = $"{student.LastName}. {student.FirstName}",
                 BookId = bookId,
                 BookTitle = book.Title,
                 CopyId = copyId,
