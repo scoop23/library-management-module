@@ -129,7 +129,7 @@ namespace LibraryManagementSystem.Forms
 
             Controls.AddRange(new Control[]
             {
-                pnlHeader, lblTitle, pnlSearch, dgvBooks, pnlActions
+                pnlHeader, pnlSearch, dgvBooks, pnlActions
             });
         }
 

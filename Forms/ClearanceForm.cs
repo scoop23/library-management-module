@@ -121,7 +121,7 @@ namespace LibraryManagementSystem.Forms
 
             btnClose = new Button { Text = "Close", Dock = DockStyle.Bottom, Height = 45, FlatStyle = FlatStyle.Flat, DialogResult = DialogResult.OK };
 
-            Controls.AddRange(new Control[] { pnlHeader, lblTitle, pnlSearch, pnlResult, btnClose });
+            Controls.AddRange(new Control[] { pnlHeader, pnlSearch, pnlResult, btnClose });
             AcceptButton = btnCheck;
         }
 

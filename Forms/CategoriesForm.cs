@@ -86,7 +86,7 @@ namespace LibraryManagementSystem.Forms
 
             pnlInput.Controls.AddRange(new Control[] { lblName, txtName, lblDesc, txtDescription, btnAdd, btnUpdate, btnDelete, btnClose });
 
-            Controls.AddRange(new Control[] { pnlHeader, lblTitle, dgvCategories, pnlInput });
+            Controls.AddRange(new Control[] { pnlHeader, dgvCategories, pnlInput });
         }
 
         private void DgvCategories_SelectionChanged(object sender, EventArgs e)
