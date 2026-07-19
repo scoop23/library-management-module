@@ -129,12 +129,19 @@ namespace LibraryManagementSystem.Forms
                 }
 
                 var activeBorrows = await _borrowService.GetActiveBorrowsByStudentAsync(student.StudentId);
+                var existingClearance = await _studentService.GetClearanceAsync(student.StudentId);
+                var previousStatus = existingClearance?.Status ?? "Not Cleared";
 
                 pnlResult.Visible = true;
                 lblStudentInfo.Text = $"Student: {student.LastName}, {student.FirstName}\n" +
-                                      $"SrCode: {student.StudentId}  | Year: {student.YearLevel}\n" +
-                                      //$"SrCode: {student.StudentId}  |  Dept: {student.Department}  |  Year: {student.YearLevel}\n" +
-                                      $"Email: {student.Email}  |  Status: {student.Status}";
+                                       $"SrCode: {student.StudentId}  |  Program: {student.ProgramId}  |  Year: {student.YearLevel}\n" +
+                                       $"Email: {student.Email}  |  Status: {student.Status}  |  Previous Clearance: {previousStatus}";
+
+                var clearanceRecord = new ClearanceRecord
+                {
+                    StudentId = student.StudentId,
+                    LastChecked = DateTime.Now
+                };
 
                 if (activeBorrows.Count == 0 && student.Status == "Active")
                 {
@@ -142,6 +149,7 @@ namespace LibraryManagementSystem.Forms
                     lblStatus.ForeColor = Color.FromArgb(46, 139, 87);
                     lblStatusDetail.Text = "No active borrows. Student is eligible for library clearance.";
                     btnPrint.Enabled = true;
+                    clearanceRecord.Status = "Cleared";
                 }
                 else if (activeBorrows.Count > 0)
                 {
@@ -149,6 +157,7 @@ namespace LibraryManagementSystem.Forms
                     lblStatus.ForeColor = Color.FromArgb(178, 34, 34);
                     lblStatusDetail.Text = $"Student has {activeBorrows.Count} active borrow(s). All books must be returned before clearance.";
                     btnPrint.Enabled = false;
+                    clearanceRecord.Status = "Not Cleared";
                 }
                 else
                 {
@@ -156,7 +165,10 @@ namespace LibraryManagementSystem.Forms
                     lblStatus.ForeColor = Color.FromArgb(178, 34, 34);
                     lblStatusDetail.Text = $"Student status is '{student.Status}'. Only active students can be cleared.";
                     btnPrint.Enabled = false;
+                    clearanceRecord.Status = "Not Cleared";
                 }
+
+                await _studentService.SaveClearanceAsync(clearanceRecord);
 
                 dgvActiveBorrows.DataSource = activeBorrows
                     .Select(b => new

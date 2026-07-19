@@ -5,7 +5,7 @@ namespace LibraryManagementSystem.Repositories
 {
     public class BookRepository : FirebaseRepository<Book>
     {
-        public BookRepository() : base("Books") { }
+        public BookRepository() : base("library/books") { }
 
         public async Task<List<Book>> SearchByTitleAsync(string keyword)
         {
@@ -16,7 +16,7 @@ namespace LibraryManagementSystem.Repositories
 
         public async Task<List<Book>> GetByCategoryAsync(string categoryId)
         {
-            var records = await Client.Child(CollectionName)
+            var records = await client.Child(CollectionName)
                 .OrderBy("CategoryId")
                 .EqualTo(categoryId)
                 .OnceAsync<Book>();
@@ -30,7 +30,7 @@ namespace LibraryManagementSystem.Repositories
 
         public async Task<Book> GetByIsbnAsync(string isbn)
         {
-            var records = await Client.Child(CollectionName)
+            var records = await client.Child(CollectionName)
                 .OrderBy("ISBN")
                 .EqualTo(isbn)
                 .LimitToFirst(1)
@@ -41,6 +41,8 @@ namespace LibraryManagementSystem.Repositories
                 match.Object.BookId = match.Key;
 
             return match?.Object;
+            //var books = await GetAllAsync();
+            //return books.FirstOrDefault(b => b.ISBN == isbn);
         }
     }
 }

@@ -76,11 +76,11 @@ namespace LibraryManagementSystem.Services
             var borrowId = await _borrowRepository.AddAsync(borrow);
 
             copy.Status = "Borrowed";
-            await _copyRepository.UpdateAsync(copyId, copy);
+            await _copyRepository.UpdateAsync(copyId, copy); // update
 
             book.AvailableCopies = Math.Max(0, book.AvailableCopies - 1);
             book.UpdatedAt = now;
-            await _bookRepository.UpdateAsync(bookId, book);
+            await _bookRepository.UpdateAsync(bookId, book); // update
 
             return borrowId;
         }

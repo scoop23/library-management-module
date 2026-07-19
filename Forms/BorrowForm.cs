@@ -140,7 +140,7 @@ namespace LibraryManagementSystem.Forms
 
                 var active = students
                     .Where(s => s.Status == "Active")
-                    .Select(s => new { s.StudentId, s.FirstName, s.LastName, s.YearLevel, s.ContactNumber })
+                    .Select(s => new { s.StudentId, s.FirstName, s.LastName, s.YearLevel, s.ContactNumber, s.ProgramId })
                     .ToList();
 
                 dgvStudents.DataSource = active;

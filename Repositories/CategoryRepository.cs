@@ -4,6 +4,6 @@ namespace LibraryManagementSystem.Repositories
 {
     public class CategoryRepository : FirebaseRepository<Category>
     {
-        public CategoryRepository() : base("lib_categories") { }
+        public CategoryRepository() : base("library/categories") { }
     }
 }

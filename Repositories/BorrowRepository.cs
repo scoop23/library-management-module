@@ -5,11 +5,11 @@ namespace LibraryManagementSystem.Repositories
 {
     public class BorrowRepository : FirebaseRepository<Borrow>
     {
-        public BorrowRepository() : base("Borrows") { }
+        public BorrowRepository() : base("library/borrows") { }
 
         public async Task<List<Borrow>> GetByStudentIdAsync(string studentId)
         {
-            var records = await Client.Child(CollectionName)
+            var records = await client.Child(CollectionName)
                 .OrderBy("StudentId")
                 .EqualTo(studentId)
                 .OnceAsync<Borrow>();
@@ -23,7 +23,7 @@ namespace LibraryManagementSystem.Repositories
 
         public async Task<List<Borrow>> GetByBookIdAsync(string bookId)
         {
-            var records = await Client.Child(CollectionName)
+            var records = await client.Child(CollectionName)
                 .OrderBy("BookId")
                 .EqualTo(bookId)
                 .OnceAsync<Borrow>();
@@ -37,7 +37,7 @@ namespace LibraryManagementSystem.Repositories
 
         public async Task<List<Borrow>> GetActiveBorrowsByStudentAsync(string studentId)
         {
-            var records = await Client.Child(CollectionName)
+            var records = await client.Child(CollectionName)
                 .OrderBy("StudentId")
                 .EqualTo(studentId)
                 .OnceAsync<Borrow>();

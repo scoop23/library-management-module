@@ -5,11 +5,11 @@ namespace LibraryManagementSystem.Repositories
 {
     public class BookCopyRepository : FirebaseRepository<BookCopy>
     {
-        public BookCopyRepository() : base("BookCopies") { }
+        public BookCopyRepository() : base("library/bookcopies") { }
 
         public async Task<List<BookCopy>> GetByBookIdAsync(string bookId)
         {
-            var records = await Client.Child(CollectionName)
+            var records = await client.Child(CollectionName)
                 .OrderBy("BookId")
                 .EqualTo(bookId)
                 .OnceAsync<BookCopy>();

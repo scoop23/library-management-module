@@ -33,9 +33,6 @@ namespace LibraryManagementSystem.Services
                 .Child(studentId)
                 .OnceSingleAsync<Student>();
 
-            if (student != null)
-                student.StudentId = studentId;
-
             return student;
         }
 
@@ -43,14 +40,12 @@ namespace LibraryManagementSystem.Services
         {
             var records = await _firebaseClient
                 .Child(_baseURL)
-                .OrderBy("StudentNumber")
+                .OrderBy("StudentId")
                 .EqualTo(studentNumber)
                 .LimitToFirst(1)
                 .OnceAsync<Student>();
 
             var match = records.FirstOrDefault();
-            if (match != null)
-                match.Object.StudentId = match.Key;
 
             return match?.Object;
         }
@@ -65,12 +60,8 @@ namespace LibraryManagementSystem.Services
                 .Where(item =>
                     (item.Object.FirstName != null && item.Object.FirstName.StartsWith(keyword, StringComparison.OrdinalIgnoreCase)) ||
                     (item.Object.LastName != null && item.Object.LastName.StartsWith(keyword, StringComparison.OrdinalIgnoreCase)) ||
-                    (item.Object.StudentNumber != null && item.Object.StudentNumber.StartsWith(keyword, StringComparison.OrdinalIgnoreCase)))
-                .Select(item =>
-                {
-                    item.Object.StudentId = item.Key;
-                    return item.Object;
-                })
+                    (item.Object.StudentId != null && item.Object.StudentId.StartsWith(keyword, StringComparison.OrdinalIgnoreCase)))
+                .Select(item => item.Object)
                 .ToList();
         }
 
@@ -80,12 +71,25 @@ namespace LibraryManagementSystem.Services
                 .Child(_baseURL)
                 .OnceAsync<Student>();
 
-            return records.Select(item =>
-            {
-                var student = item.Object;
-                student.StudentId = item.Key;
-                return student;
-            }).ToList();
+            return records.Select(item => item.Object).ToList();
+        }
+
+        public async Task<ClearanceRecord> GetClearanceAsync(string studentId)
+        {
+            var record = await _firebaseClient
+                .Child("library/clearanceStatuses")
+                .Child(studentId)
+                .OnceSingleAsync<ClearanceRecord>();
+
+            return record;
+        }
+
+        public async Task SaveClearanceAsync(ClearanceRecord record)
+        {
+            await _firebaseClient
+                .Child("library/clearanceStatuses")
+                .Child(record.StudentId)
+                .PutAsync(record);
         }
     }
 }
