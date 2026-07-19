@@ -78,7 +78,7 @@ namespace LibraryManagementSystem.Forms
 
             pnlResult = new Panel { Location = new Point(20, 130), Width = 670, Height = 370, Visible = false, BackColor = Color.White, BorderStyle = BorderStyle.FixedSingle };
 
-            lblStudentInfo = new Label { Location = new Point(10, 10), Width = 650, Font = new Font("Segoe UI", 9) };
+            lblStudentInfo = new Label { Location = new Point(10, 10), Width = 650, Height = 500, Font = new Font("Segoe UI", 9) };
             pnlResult.Controls.Add(lblStudentInfo);
 
             lblStatus = new Label { Location = new Point(10, 60), Width = 650, Font = new Font("Segoe UI", 14, FontStyle.Bold), AutoSize = true };
