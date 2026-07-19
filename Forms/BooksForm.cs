@@ -25,57 +25,60 @@ namespace LibraryManagementSystem.Forms
         private void InitializeComponent()
         {
             Text = "Library Management";
-            Width = 1020;
-            Height = 620;
-            BackColor = Color.White;
+            Width = 1060;
+            Height = 720;
+            BackColor = Color.FromArgb(245, 247, 250);
             StartPosition = FormStartPosition.CenterScreen;
+
+            var pnlHeader = new Panel
+            {
+                Dock = DockStyle.Top,
+                Height = 60,
+                BackColor = Color.FromArgb(21, 67, 140)
+            };
 
             lblTitle = new Label
             {
                 Text = "Library Management",
                 Font = new Font("Segoe UI", 16, FontStyle.Bold),
-                ForeColor = Color.FromArgb(21, 67, 140),
-                Location = new Point(20, 15),
+                ForeColor = Color.White,
+                Location = new Point(20, 16),
                 AutoSize = true
             };
+            pnlHeader.Controls.Add(lblTitle);
 
-            txtSearch = new TextBox { Location = new Point(20, 55), Width = 240, PlaceholderText = "Search by title..." };
+            var pnlSearch = new Panel
+            {
+                Location = new Point(20, 75),
+                Width = 1010,
+                Height = 50,
+                BackColor = Color.White,
+                BorderStyle = BorderStyle.FixedSingle
+            };
 
-            btnSearch = new Button { Text = "Search", Location = new Point(270, 53), Width = 80, BackColor = Color.FromArgb(21, 67, 140), ForeColor = Color.White, FlatStyle = FlatStyle.Flat };
+            var lblSearch = new Label { Text = "Search:", Location = new Point(12, 14), Width = 55, Font = new Font("Segoe UI", 9) };
+            txtSearch = new TextBox { Location = new Point(70, 10), Width = 260, PlaceholderText = "Search by title..." };
+
+            btnSearch = new Button { Text = "Search", Location = new Point(345, 8), Width = 90, Height = 30, BackColor = Color.FromArgb(21, 67, 140), ForeColor = Color.White, FlatStyle = FlatStyle.Flat };
             btnSearch.Click += BtnSearch_Click;
 
-            cmbCategory = new ComboBox { Location = new Point(360, 53), Width = 190, DropDownStyle = ComboBoxStyle.DropDownList, DisplayMember = "Name", ValueMember = "CategoryId" };
+            var lblCategory = new Label { Text = "Category:", Location = new Point(455, 14), Width = 65, Font = new Font("Segoe UI", 9) };
+            cmbCategory = new ComboBox { Location = new Point(525, 10), Width = 200, DropDownStyle = ComboBoxStyle.DropDownList, DisplayMember = "Name", ValueMember = "CategoryId" };
             cmbCategory.SelectedIndexChanged += SelectIndex_Changed;
 
-            btnRefresh = new Button { Text = "Refresh", Location = new Point(560, 53), Width = 80, FlatStyle = FlatStyle.Flat };
+            btnRefresh = new Button { Text = "Refresh", Location = new Point(745, 8), Width = 90, Height = 30, FlatStyle = FlatStyle.Flat };
             btnRefresh.Click += BtnRefresh_Click;
 
-            btnAdd = new Button { Text = "Add Book", Location = new Point(670, 53), Width = 90, BackColor = Color.FromArgb(46, 139, 87), ForeColor = Color.White, FlatStyle = FlatStyle.Flat };
-            btnAdd.Click += BtnAdd_Click;
-
-            btnEdit = new Button { Text = "Edit", Location = new Point(770, 53), Width = 70, FlatStyle = FlatStyle.Flat };
-            btnEdit.Click += BtnEdit_Click;
-
-            btnCopies = new Button { Text = "Copies", Location = new Point(850, 53), Width = 90, FlatStyle = FlatStyle.Flat };
-            btnCopies.Click += BtnCopies_Click;
-
-            btnCategories = new Button { Text = "Categories...", Location = new Point(20, 550), Width = 110, FlatStyle = FlatStyle.Flat };
+            btnCategories = new Button { Text = "Categories", Location = new Point(855, 8), Width = 100, Height = 30, FlatStyle = FlatStyle.Flat };
             btnCategories.Click += BtnCategories_Click;
 
-            btnBorrow = new Button { Text = "Borrow Book", Location = new Point(300, 550), Width = 120, BackColor = Color.FromArgb(46, 139, 87), ForeColor = Color.White, FlatStyle = FlatStyle.Flat };
-            btnBorrow.Click += BtnBorrow_Click;
-
-            btnReturn = new Button { Text = "Return Book", Location = new Point(430, 550), Width = 120, BackColor = Color.FromArgb(21, 67, 140), ForeColor = Color.White, FlatStyle = FlatStyle.Flat };
-            btnReturn.Click += BtnReturn_Click;
-
-            btnClearance = new Button { Text = "Clearance", Location = new Point(560, 550), Width = 110, FlatStyle = FlatStyle.Flat };
-            btnClearance.Click += BtnClearance_Click;
+            pnlSearch.Controls.AddRange(new Control[] { lblSearch, txtSearch, btnSearch, lblCategory, cmbCategory, btnRefresh, btnCategories });
 
             dgvBooks = new DataGridView
             {
-                Location = new Point(20, 95),
-                Width = 960,
-                Height = 410,
+                Location = new Point(20, 140),
+                Width = 1010,
+                Height = 420,
                 ReadOnly = true,
                 AllowUserToAddRows = false,
                 SelectionMode = DataGridViewSelectionMode.FullRowSelect,
@@ -85,16 +88,48 @@ namespace LibraryManagementSystem.Forms
                 BorderStyle = BorderStyle.FixedSingle
             };
 
-            btnArchive = new Button { Text = "Archive", Location = new Point(20, 520), Width = 100, FlatStyle = FlatStyle.Flat };
+            var pnlActions = new Panel
+            {
+                Dock = DockStyle.Bottom,
+                Height = 55,
+                BackColor = Color.White,
+                BorderStyle = BorderStyle.FixedSingle
+            };
+
+            btnAdd = new Button { Text = "Add Book", Location = new Point(10, 8), Width = 100, Height = 32, BackColor = Color.FromArgb(46, 139, 87), ForeColor = Color.White, FlatStyle = FlatStyle.Flat };
+            btnAdd.Click += BtnAdd_Click;
+
+            btnEdit = new Button { Text = "Edit", Location = new Point(120, 8), Width = 80, Height = 32, FlatStyle = FlatStyle.Flat };
+            btnEdit.Click += BtnEdit_Click;
+
+            btnCopies = new Button { Text = "Copies", Location = new Point(210, 8), Width = 80, Height = 32, FlatStyle = FlatStyle.Flat };
+            btnCopies.Click += BtnCopies_Click;
+
+            btnArchive = new Button { Text = "Archive", Location = new Point(310, 8), Width = 90, Height = 32, FlatStyle = FlatStyle.Flat };
             btnArchive.Click += BtnArchive_Click;
 
-            btnDelete = new Button { Text = "Delete", Location = new Point(130, 520), Width = 100, BackColor = Color.FromArgb(178, 34, 34), ForeColor = Color.White, FlatStyle = FlatStyle.Flat };
+            btnDelete = new Button { Text = "Delete", Location = new Point(410, 8), Width = 90, Height = 32, BackColor = Color.FromArgb(178, 34, 34), ForeColor = Color.White, FlatStyle = FlatStyle.Flat };
             btnDelete.Click += BtnDelete_Click;
+
+            var lblNav = new Label { Text = "Navigate:", Location = new Point(560, 14), Width = 65, Font = new Font("Segoe UI", 9, FontStyle.Bold), ForeColor = Color.Gray };
+
+            btnBorrow = new Button { Text = "Borrow Book", Location = new Point(635, 8), Width = 110, Height = 32, BackColor = Color.FromArgb(46, 139, 87), ForeColor = Color.White, FlatStyle = FlatStyle.Flat };
+            btnBorrow.Click += BtnBorrow_Click;
+
+            btnReturn = new Button { Text = "Return Book", Location = new Point(755, 8), Width = 110, Height = 32, BackColor = Color.FromArgb(21, 67, 140), ForeColor = Color.White, FlatStyle = FlatStyle.Flat };
+            btnReturn.Click += BtnReturn_Click;
+
+            btnClearance = new Button { Text = "Clearance", Location = new Point(875, 8), Width = 100, Height = 32, FlatStyle = FlatStyle.Flat };
+            btnClearance.Click += BtnClearance_Click;
+
+            pnlActions.Controls.AddRange(new Control[]
+            {
+                btnAdd, btnEdit, btnCopies, btnArchive, btnDelete, lblNav, btnBorrow, btnReturn, btnClearance
+            });
 
             Controls.AddRange(new Control[]
             {
-                lblTitle, txtSearch, btnSearch, cmbCategory, btnRefresh, btnAdd, btnEdit, btnCopies,
-                dgvBooks, btnArchive, btnDelete, btnCategories, btnBorrow, btnReturn, btnClearance
+                pnlHeader, lblTitle, pnlSearch, dgvBooks, pnlActions
             });
         }
 

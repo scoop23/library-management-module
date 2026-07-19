@@ -32,30 +32,38 @@ namespace LibraryManagementSystem.Forms
         private void InitializeComponent()
         {
             Text = "Borrow Book";
-            Width = 980;
-            Height = 620;
+            Width = 1000;
+            Height = 750;
             StartPosition = FormStartPosition.CenterParent;
-            BackColor = Color.White;
+            BackColor = Color.FromArgb(245, 247, 250);
+
+            var pnlHeader = new Panel
+            {
+                Dock = DockStyle.Top,
+                Height = 50,
+                BackColor = Color.FromArgb(21, 67, 140)
+            };
 
             var lblTitle = new Label
             {
                 Text = "Borrow Book",
-                Font = new Font("Segoe UI", 16, FontStyle.Bold),
-                ForeColor = Color.FromArgb(21, 67, 140),
-                Location = new Point(20, 15),
+                Font = new Font("Segoe UI", 13, FontStyle.Bold),
+                ForeColor = Color.White,
+                Location = new Point(15, 13),
                 AutoSize = true
             };
+            pnlHeader.Controls.Add(lblTitle);
 
-            var lblStudentHeader = new Label { Text = "1. Select Student", Font = new Font("Segoe UI", 10, FontStyle.Bold), Location = new Point(20, 55), AutoSize = true };
-            txtStudentSearch = new TextBox { Location = new Point(20, 80), Width = 240, PlaceholderText = "Search student by name..." };
-            btnSearchStudent = new Button { Text = "Search", Location = new Point(270, 78), Width = 80, BackColor = Color.FromArgb(21, 67, 140), ForeColor = Color.White, FlatStyle = FlatStyle.Flat };
+            var lblStudentHeader = new Label { Text = "Step 1: Select Student", Font = new Font("Segoe UI", 10, FontStyle.Bold), Location = new Point(20, 65), AutoSize = true, ForeColor = Color.FromArgb(21, 67, 140) };
+            txtStudentSearch = new TextBox { Location = new Point(20, 90), Width = 260, PlaceholderText = "Search student by name..." };
+            btnSearchStudent = new Button { Text = "Search", Location = new Point(290, 88), Width = 90, Height = 28, BackColor = Color.FromArgb(21, 67, 140), ForeColor = Color.White, FlatStyle = FlatStyle.Flat };
             btnSearchStudent.Click += async (s, e) => await LoadStudentsAsync(txtStudentSearch.Text.Trim());
 
             dgvStudents = new DataGridView
             {
-                Location = new Point(20, 110),
-                Width = 920,
-                Height = 130,
+                Location = new Point(20, 122),
+                Width = 945,
+                Height = 120,
                 ReadOnly = true,
                 AllowUserToAddRows = false,
                 SelectionMode = DataGridViewSelectionMode.FullRowSelect,
@@ -66,18 +74,18 @@ namespace LibraryManagementSystem.Forms
             };
             dgvStudents.SelectionChanged += DgvStudents_SelectionChanged;
 
-            lblSelectedStudent = new Label { Text = "No student selected", Location = new Point(20, 248), Width = 920, ForeColor = Color.Gray };
+            lblSelectedStudent = new Label { Text = "No student selected", Location = new Point(20, 248), Width = 945, ForeColor = Color.Gray, Font = new Font("Segoe UI", 9, FontStyle.Italic) };
 
-            var lblBookHeader = new Label { Text = "2. Select Book", Font = new Font("Segoe UI", 10, FontStyle.Bold), Location = new Point(20, 275), AutoSize = true };
-            txtBookSearch = new TextBox { Location = new Point(20, 300), Width = 240, PlaceholderText = "Search book by title..." };
-            btnSearchBook = new Button { Text = "Search", Location = new Point(270, 298), Width = 80, BackColor = Color.FromArgb(21, 67, 140), ForeColor = Color.White, FlatStyle = FlatStyle.Flat };
+            var lblBookHeader = new Label { Text = "Step 2: Select Book", Font = new Font("Segoe UI", 10, FontStyle.Bold), Location = new Point(20, 278), AutoSize = true, ForeColor = Color.FromArgb(21, 67, 140) };
+            txtBookSearch = new TextBox { Location = new Point(20, 303), Width = 260, PlaceholderText = "Search book by title..." };
+            btnSearchBook = new Button { Text = "Search", Location = new Point(290, 301), Width = 90, Height = 28, BackColor = Color.FromArgb(21, 67, 140), ForeColor = Color.White, FlatStyle = FlatStyle.Flat };
             btnSearchBook.Click += async (s, e) => await LoadBooksAsync(txtBookSearch.Text.Trim());
 
             dgvBooks = new DataGridView
             {
-                Location = new Point(20, 330),
-                Width = 920,
-                Height = 100,
+                Location = new Point(20, 335),
+                Width = 945,
+                Height = 110,
                 ReadOnly = true,
                 AllowUserToAddRows = false,
                 SelectionMode = DataGridViewSelectionMode.FullRowSelect,
@@ -88,15 +96,15 @@ namespace LibraryManagementSystem.Forms
             };
             dgvBooks.SelectionChanged += DgvBooks_SelectionChanged;
 
-            lblSelectedBook = new Label { Text = "No book selected", Location = new Point(20, 438), Width = 920, ForeColor = Color.Gray };
+            lblSelectedBook = new Label { Text = "No book selected", Location = new Point(20, 451), Width = 945, ForeColor = Color.Gray, Font = new Font("Segoe UI", 9, FontStyle.Italic) };
 
-            var lblCopyHeader = new Label { Text = "3. Select Copy", Font = new Font("Segoe UI", 10, FontStyle.Bold), Location = new Point(20, 465), AutoSize = true };
+            var lblCopyHeader = new Label { Text = "Step 3: Select Copy", Font = new Font("Segoe UI", 10, FontStyle.Bold), Location = new Point(20, 481), AutoSize = true, ForeColor = Color.FromArgb(21, 67, 140) };
 
             dgvCopies = new DataGridView
             {
-                Location = new Point(20, 490),
-                Width = 920,
-                Height = 80,
+                Location = new Point(20, 506),
+                Width = 945,
+                Height = 90,
                 ReadOnly = true,
                 AllowUserToAddRows = false,
                 SelectionMode = DataGridViewSelectionMode.FullRowSelect,
@@ -107,12 +115,20 @@ namespace LibraryManagementSystem.Forms
             };
             dgvCopies.SelectionChanged += DgvCopies_SelectionChanged;
 
+            var pnlFooter = new Panel
+            {
+                Dock = DockStyle.Bottom,
+                Height = 65,
+                BackColor = Color.White,
+                BorderStyle = BorderStyle.FixedSingle
+            };
+
             btnBorrow = new Button
             {
                 Text = "Borrow Selected Copy",
-                Location = new Point(700, 560),
+                Location = new Point(720, 15),
                 Width = 180,
-                Height = 35,
+                Height = 38,
                 BackColor = Color.FromArgb(46, 139, 87),
                 ForeColor = Color.White,
                 FlatStyle = FlatStyle.Flat,
@@ -120,13 +136,15 @@ namespace LibraryManagementSystem.Forms
             };
             btnBorrow.Click += BtnBorrow_Click;
 
-            btnClose = new Button { Text = "Close", Location = new Point(890, 560), Width = 80, FlatStyle = FlatStyle.Flat, DialogResult = DialogResult.OK };
+            btnClose = new Button { Text = "Close", Location = new Point(20, 15), Width = 100, Height = 38, FlatStyle = FlatStyle.Flat, DialogResult = DialogResult.OK };
+
+            pnlFooter.Controls.AddRange(new Control[] { btnBorrow, btnClose });
 
             Controls.AddRange(new Control[]
             {
-                lblTitle, lblStudentHeader, txtStudentSearch, btnSearchStudent, dgvStudents, lblSelectedStudent,
+                pnlHeader, lblTitle, lblStudentHeader, txtStudentSearch, btnSearchStudent, dgvStudents, lblSelectedStudent,
                 lblBookHeader, txtBookSearch, btnSearchBook, dgvBooks, lblSelectedBook,
-                lblCopyHeader, dgvCopies, btnBorrow, btnClose
+                lblCopyHeader, dgvCopies, pnlFooter
             });
         }
 

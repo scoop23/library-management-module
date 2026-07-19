@@ -25,31 +25,48 @@ namespace LibraryManagementSystem.Forms
         private void InitializeComponent()
         {
             Text = "Library Clearance";
-            Width = 700;
-            Height = 520;
+            Width = 720;
+            Height = 610;
             StartPosition = FormStartPosition.CenterParent;
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
             MinimizeBox = false;
-            BackColor = Color.White;
+            BackColor = Color.FromArgb(245, 247, 250);
+
+            var pnlHeader = new Panel
+            {
+                Dock = DockStyle.Top,
+                Height = 50,
+                BackColor = Color.FromArgb(21, 67, 140)
+            };
 
             var lblTitle = new Label
             {
                 Text = "Library Clearance",
-                Font = new Font("Segoe UI", 16, FontStyle.Bold),
-                ForeColor = Color.FromArgb(21, 67, 140),
-                Location = new Point(20, 15),
+                Font = new Font("Segoe UI", 13, FontStyle.Bold),
+                ForeColor = Color.White,
+                Location = new Point(15, 13),
                 AutoSize = true
             };
+            pnlHeader.Controls.Add(lblTitle);
 
-            var lblPrompt = new Label { Text = "Enter Student Number:", Location = new Point(20, 60), Width = 150 };
-            txtStudentNumber = new TextBox { Location = new Point(180, 57), Width = 250, PlaceholderText = "e.g. STU-2026-001" };
+            var pnlSearch = new Panel
+            {
+                Location = new Point(20, 65),
+                Width = 670,
+                Height = 50,
+                BackColor = Color.White,
+                BorderStyle = BorderStyle.FixedSingle
+            };
+
+            var lblPrompt = new Label { Text = "Student Number:", Location = new Point(10, 14), Width = 110, Font = new Font("Segoe UI", 9) };
+            txtStudentNumber = new TextBox { Location = new Point(125, 10), Width = 280, PlaceholderText = "e.g. 26-00001" };
 
             btnCheck = new Button
             {
                 Text = "Check Clearance",
-                Location = new Point(450, 55),
-                Width = 130,
+                Location = new Point(420, 8),
+                Width = 140,
                 Height = 30,
                 BackColor = Color.FromArgb(21, 67, 140),
                 ForeColor = Color.White,
@@ -57,25 +74,27 @@ namespace LibraryManagementSystem.Forms
             };
             btnCheck.Click += BtnCheck_Click;
 
-            pnlResult = new Panel { Location = new Point(20, 100), Width = 640, Height = 350, Visible = false };
+            pnlSearch.Controls.AddRange(new Control[] { lblPrompt, txtStudentNumber, btnCheck });
 
-            lblStudentInfo = new Label { Location = new Point(0, 0), Width = 640, Font = new Font("Segoe UI", 10) };
+            pnlResult = new Panel { Location = new Point(20, 130), Width = 670, Height = 370, Visible = false, BackColor = Color.White, BorderStyle = BorderStyle.FixedSingle };
+
+            lblStudentInfo = new Label { Location = new Point(10, 10), Width = 650, Font = new Font("Segoe UI", 9) };
             pnlResult.Controls.Add(lblStudentInfo);
 
-            lblStatus = new Label { Location = new Point(0, 50), Width = 640, Font = new Font("Segoe UI", 14, FontStyle.Bold), AutoSize = true };
+            lblStatus = new Label { Location = new Point(10, 60), Width = 650, Font = new Font("Segoe UI", 14, FontStyle.Bold), AutoSize = true };
             pnlResult.Controls.Add(lblStatus);
 
-            lblStatusDetail = new Label { Location = new Point(0, 85), Width = 640, ForeColor = Color.Gray };
+            lblStatusDetail = new Label { Location = new Point(10, 95), Width = 650, ForeColor = Color.Gray, Font = new Font("Segoe UI", 9) };
             pnlResult.Controls.Add(lblStatusDetail);
 
-            var lblActiveHeader = new Label { Text = "Active Borrows:", Location = new Point(0, 120), Width = 200, Font = new Font("Segoe UI", 9, FontStyle.Bold) };
+            var lblActiveHeader = new Label { Text = "Active Borrows:", Location = new Point(10, 130), Width = 200, Font = new Font("Segoe UI", 9, FontStyle.Bold) };
             pnlResult.Controls.Add(lblActiveHeader);
 
             dgvActiveBorrows = new DataGridView
             {
-                Location = new Point(0, 145),
-                Width = 640,
-                Height = 160,
+                Location = new Point(10, 155),
+                Width = 650,
+                Height = 140,
                 ReadOnly = true,
                 AllowUserToAddRows = false,
                 SelectionMode = DataGridViewSelectionMode.FullRowSelect,
@@ -89,9 +108,9 @@ namespace LibraryManagementSystem.Forms
             btnPrint = new Button
             {
                 Text = "Print Clearance",
-                Location = new Point(0, 315),
-                Width = 140,
-                Height = 30,
+                Location = new Point(10, 318),
+                Width = 150,
+                Height = 34,
                 BackColor = Color.FromArgb(46, 139, 87),
                 ForeColor = Color.White,
                 FlatStyle = FlatStyle.Flat,
@@ -100,9 +119,9 @@ namespace LibraryManagementSystem.Forms
             btnPrint.Click += BtnPrint_Click;
             pnlResult.Controls.Add(btnPrint);
 
-            btnClose = new Button { Text = "Close", Location = new Point(560, 440), Width = 100, FlatStyle = FlatStyle.Flat, DialogResult = DialogResult.OK };
+            btnClose = new Button { Text = "Close", Dock = DockStyle.Bottom, Height = 45, FlatStyle = FlatStyle.Flat, DialogResult = DialogResult.OK };
 
-            Controls.AddRange(new Control[] { lblTitle, lblPrompt, txtStudentNumber, btnCheck, pnlResult, btnClose });
+            Controls.AddRange(new Control[] { pnlHeader, lblTitle, pnlSearch, pnlResult, btnClose });
             AcceptButton = btnCheck;
         }
 

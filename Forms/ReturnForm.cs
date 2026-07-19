@@ -24,32 +24,52 @@ namespace LibraryManagementSystem.Forms
         private void InitializeComponent()
         {
             Text = "Return Book";
-            Width = 900;
-            Height = 520;
+            Width = 920;
+            Height = 610;
             StartPosition = FormStartPosition.CenterParent;
-            BackColor = Color.White;
+            BackColor = Color.FromArgb(245, 247, 250);
+
+            var pnlHeader = new Panel
+            {
+                Dock = DockStyle.Top,
+                Height = 50,
+                BackColor = Color.FromArgb(21, 67, 140)
+            };
 
             lblTitle = new Label
             {
                 Text = "Return Book",
-                Font = new Font("Segoe UI", 16, FontStyle.Bold),
-                ForeColor = Color.FromArgb(21, 67, 140),
-                Location = new Point(20, 15),
+                Font = new Font("Segoe UI", 13, FontStyle.Bold),
+                ForeColor = Color.White,
+                Location = new Point(15, 13),
                 AutoSize = true
             };
+            pnlHeader.Controls.Add(lblTitle);
 
-            txtStudentSearch = new TextBox { Location = new Point(20, 55), Width = 240, PlaceholderText = "Search by student name..." };
-            btnSearch = new Button { Text = "Search", Location = new Point(270, 53), Width = 80, BackColor = Color.FromArgb(21, 67, 140), ForeColor = Color.White, FlatStyle = FlatStyle.Flat };
+            var pnlSearch = new Panel
+            {
+                Location = new Point(20, 65),
+                Width = 870,
+                Height = 44,
+                BackColor = Color.White,
+                BorderStyle = BorderStyle.FixedSingle
+            };
+
+            var lblSearch = new Label { Text = "Search:", Location = new Point(10, 12), Width = 55, Font = new Font("Segoe UI", 9) };
+            txtStudentSearch = new TextBox { Location = new Point(70, 8), Width = 260, PlaceholderText = "Search by student name..." };
+            btnSearch = new Button { Text = "Search", Location = new Point(340, 6), Width = 90, Height = 28, BackColor = Color.FromArgb(21, 67, 140), ForeColor = Color.White, FlatStyle = FlatStyle.Flat };
             btnSearch.Click += async (s, e) => await LoadActiveBorrowsAsync(txtStudentSearch.Text.Trim());
 
-            btnRefresh = new Button { Text = "Refresh", Location = new Point(360, 53), Width = 80, FlatStyle = FlatStyle.Flat };
+            btnRefresh = new Button { Text = "Refresh", Location = new Point(445, 6), Width = 90, Height = 28, FlatStyle = FlatStyle.Flat };
             btnRefresh.Click += async (s, e) => { txtStudentSearch.Clear(); await LoadActiveBorrowsAsync(); };
+
+            pnlSearch.Controls.AddRange(new Control[] { lblSearch, txtStudentSearch, btnSearch, btnRefresh });
 
             dgvBorrows = new DataGridView
             {
-                Location = new Point(20, 95),
-                Width = 840,
-                Height = 300,
+                Location = new Point(20, 125),
+                Width = 870,
+                Height = 340,
                 ReadOnly = true,
                 AllowUserToAddRows = false,
                 SelectionMode = DataGridViewSelectionMode.FullRowSelect,
@@ -60,14 +80,22 @@ namespace LibraryManagementSystem.Forms
             };
             dgvBorrows.SelectionChanged += DgvBorrows_SelectionChanged;
 
-            lblSelectedBorrow = new Label { Text = "No borrow selected", Location = new Point(20, 405), Width = 600, ForeColor = Color.Gray };
+            lblSelectedBorrow = new Label { Text = "No borrow selected", Location = new Point(20, 442), Width = 600, ForeColor = Color.Gray, Font = new Font("Segoe UI", 9, FontStyle.Italic) };
+
+            var pnlFooter = new Panel
+            {
+                Dock = DockStyle.Bottom,
+                Height = 70,
+                BackColor = Color.White,
+                BorderStyle = BorderStyle.FixedSingle
+            };
 
             btnReturn = new Button
             {
                 Text = "Mark as Returned",
-                Location = new Point(20, 435),
+                Location = new Point(20, 18),
                 Width = 160,
-                Height = 35,
+                Height = 38,
                 BackColor = Color.FromArgb(46, 139, 87),
                 ForeColor = Color.White,
                 FlatStyle = FlatStyle.Flat,
@@ -78,9 +106,9 @@ namespace LibraryManagementSystem.Forms
             btnMarkLost = new Button
             {
                 Text = "Mark as Lost",
-                Location = new Point(190, 435),
+                Location = new Point(195, 18),
                 Width = 130,
-                Height = 35,
+                Height = 38,
                 BackColor = Color.FromArgb(178, 34, 34),
                 ForeColor = Color.White,
                 FlatStyle = FlatStyle.Flat,
@@ -88,12 +116,13 @@ namespace LibraryManagementSystem.Forms
             };
             btnMarkLost.Click += BtnMarkLost_Click;
 
-            btnClose = new Button { Text = "Close", Location = new Point(760, 435), Width = 100, FlatStyle = FlatStyle.Flat, DialogResult = DialogResult.OK };
+            btnClose = new Button { Text = "Close", Location = new Point(770, 18), Width = 90, Height = 38, FlatStyle = FlatStyle.Flat, DialogResult = DialogResult.OK };
+
+            pnlFooter.Controls.AddRange(new Control[] { btnReturn, btnMarkLost, btnClose });
 
             Controls.AddRange(new Control[]
             {
-                lblTitle, txtStudentSearch, btnSearch, btnRefresh, dgvBorrows, lblSelectedBorrow,
-                btnReturn, btnMarkLost, btnClose
+                pnlHeader, lblTitle, pnlSearch, dgvBorrows, lblSelectedBorrow, pnlFooter
             });
         }
 

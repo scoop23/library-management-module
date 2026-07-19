@@ -35,75 +35,102 @@ namespace LibraryManagementSystem.Forms
         private void InitializeComponent()
         {
             Text = _bookId == null ? "Add Book" : "Edit Book";
-            Width = 480;
-            Height = 560;
+            Width = 500;
+            Height = 650;
             StartPosition = FormStartPosition.CenterParent;
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
             MinimizeBox = false;
             BackColor = Color.White;
 
-            int y = 20;
-            const int labelWidth = 110, fieldWidth = 300, rowHeight = 34;
+            var pnlHeader = new Panel
+            {
+                Dock = DockStyle.Top,
+                Height = 50,
+                BackColor = Color.FromArgb(21, 67, 140)
+            };
 
-            Label MakeLabel(string text) => new() { Text = text, Location = new Point(20, y + 4), Width = labelWidth };
+            var lblHeader = new Label
+            {
+                Text = Text,
+                Font = new Font("Segoe UI", 13, FontStyle.Bold),
+                ForeColor = Color.White,
+                Location = new Point(15, 12),
+                AutoSize = true
+            };
+            pnlHeader.Controls.Add(lblHeader);
+
+            int y = 70;
+            const int leftMargin = 20, labelWidth = 130, fieldWidth = 310, rowHeight = 36;
+
+            Label MakeLabel(string text) => new() { Text = text, Location = new Point(leftMargin, y + 5), Width = labelWidth, Font = new Font("Segoe UI", 9) };
 
             Controls.Add(MakeLabel("ISBN *"));
-            txtIsbn = new TextBox { Location = new Point(140, y), Width = fieldWidth };
+            txtIsbn = new TextBox { Location = new Point(leftMargin + labelWidth, y), Width = fieldWidth, Height = 28 };
             Controls.Add(txtIsbn);
             y += rowHeight;
 
             Controls.Add(MakeLabel("Title *"));
-            txtTitle = new TextBox { Location = new Point(140, y), Width = fieldWidth };
+            txtTitle = new TextBox { Location = new Point(leftMargin + labelWidth, y), Width = fieldWidth, Height = 28 };
             Controls.Add(txtTitle);
             y += rowHeight;
 
             Controls.Add(MakeLabel("Author *"));
-            txtAuthor = new TextBox { Location = new Point(140, y), Width = fieldWidth };
+            txtAuthor = new TextBox { Location = new Point(leftMargin + labelWidth, y), Width = fieldWidth, Height = 28 };
             Controls.Add(txtAuthor);
             y += rowHeight;
 
             Controls.Add(MakeLabel("Publisher"));
-            txtPublisher = new TextBox { Location = new Point(140, y), Width = fieldWidth };
+            txtPublisher = new TextBox { Location = new Point(leftMargin + labelWidth, y), Width = fieldWidth, Height = 28 };
             Controls.Add(txtPublisher);
             y += rowHeight;
 
             Controls.Add(MakeLabel("Category"));
-            cmbCategory = new ComboBox { Location = new Point(140, y), Width = fieldWidth, DropDownStyle = ComboBoxStyle.DropDownList, DisplayMember = "Name", ValueMember = "CategoryId" };
+            cmbCategory = new ComboBox { Location = new Point(leftMargin + labelWidth, y), Width = fieldWidth, DropDownStyle = ComboBoxStyle.DropDownList, DisplayMember = "Name", ValueMember = "CategoryId" };
             Controls.Add(cmbCategory);
             y += rowHeight;
 
             Controls.Add(MakeLabel("Publication Year"));
-            numYear = new NumericUpDown { Location = new Point(140, y), Width = 120, Minimum = 0, Maximum = DateTime.Now.Year + 1, Value = DateTime.Now.Year };
+            numYear = new NumericUpDown { Location = new Point(leftMargin + labelWidth, y), Width = 140, Minimum = 0, Maximum = DateTime.Now.Year + 1, Value = DateTime.Now.Year };
             Controls.Add(numYear);
             y += rowHeight;
 
             Controls.Add(MakeLabel("Total Copies *"));
-            numCopies = new NumericUpDown { Location = new Point(140, y), Width = 120, Minimum = 0, Maximum = 10000, Value = 1 };
+            numCopies = new NumericUpDown { Location = new Point(leftMargin + labelWidth, y), Width = 140, Minimum = 0, Maximum = 10000, Value = 1 };
             Controls.Add(numCopies);
-            y += rowHeight;
+            y += rowHeight + 4;
 
             Controls.Add(MakeLabel("Description"));
-            txtDescription = new TextBox { Location = new Point(140, y), Width = fieldWidth, Height = 70, Multiline = true, ScrollBars = ScrollBars.Vertical };
+            txtDescription = new TextBox { Location = new Point(leftMargin + labelWidth, y), Width = fieldWidth, Height = 70, Multiline = true, ScrollBars = ScrollBars.Vertical };
             Controls.Add(txtDescription);
-            y += 80;
+            y += 82;
 
             Controls.Add(MakeLabel("Cover Image"));
-            picCover = new PictureBox { Location = new Point(140, y), Width = 60, Height = 60, BorderStyle = BorderStyle.FixedSingle, SizeMode = PictureBoxSizeMode.Zoom };
+            picCover = new PictureBox { Location = new Point(leftMargin + labelWidth, y), Width = 60, Height = 60, BorderStyle = BorderStyle.FixedSingle, SizeMode = PictureBoxSizeMode.Zoom };
             Controls.Add(picCover);
-            btnBrowseCover = new Button { Text = "Browse...", Location = new Point(210, y + 18), Width = 90, FlatStyle = FlatStyle.Flat };
+            btnBrowseCover = new Button { Text = "Browse...", Location = new Point(leftMargin + labelWidth + 70, y + 15), Width = 90, FlatStyle = FlatStyle.Flat };
             btnBrowseCover.Click += BtnBrowseCover_Click;
             Controls.Add(btnBrowseCover);
-            lblCoverPath = new Label { Location = new Point(310, y + 22), Width = 130, Text = "No file selected", ForeColor = Color.Gray, AutoEllipsis = true };
+            lblCoverPath = new Label { Location = new Point(leftMargin + labelWidth + 170, y + 19), Width = 140, Text = "No file selected", ForeColor = Color.Gray, AutoEllipsis = true };
             Controls.Add(lblCoverPath);
             y += 80;
 
-            btnSave = new Button { Text = "Save", Location = new Point(140, y), Width = 100, BackColor = Color.FromArgb(21, 67, 140), ForeColor = Color.White, FlatStyle = FlatStyle.Flat };
-            btnSave.Click += BtnSave_Click;
-            Controls.Add(btnSave);
+            var pnlFooter = new Panel
+            {
+                Dock = DockStyle.Bottom,
+                Height = 65,
+                BackColor = Color.FromArgb(245, 247, 250),
+                BorderStyle = BorderStyle.FixedSingle
+            };
 
-            btnCancel = new Button { Text = "Cancel", Location = new Point(250, y), Width = 100, FlatStyle = FlatStyle.Flat, DialogResult = DialogResult.Cancel };
-            Controls.Add(btnCancel);
+            btnSave = new Button { Text = "Save", Location = new Point(140, 12), Width = 110, Height = 36, BackColor = Color.FromArgb(21, 67, 140), ForeColor = Color.White, FlatStyle = FlatStyle.Flat };
+            btnSave.Click += BtnSave_Click;
+            pnlFooter.Controls.Add(btnSave);
+
+            btnCancel = new Button { Text = "Cancel", Location = new Point(260, 12), Width = 110, Height = 36, FlatStyle = FlatStyle.Flat, DialogResult = DialogResult.Cancel };
+            pnlFooter.Controls.Add(btnCancel);
+
+            Controls.AddRange(new Control[] { pnlHeader, lblHeader, pnlFooter });
 
             AcceptButton = btnSave;
             CancelButton = btnCancel;
