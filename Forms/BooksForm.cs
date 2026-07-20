@@ -163,6 +163,16 @@ namespace LibraryManagementSystem.Forms
                         ? await _bookService.GetBooksByCategoryAsync(categoryId)
                         : await _bookService.GetAllBooksAsync();
 
+                if (!string.IsNullOrWhiteSpace(keyword) && !books.Any())
+                {
+                    MessageBox.Show(
+                        $"No books found matching \"{keyword}\".",
+                        "Search Results",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                }
+
+
                 dgvBooks.DataSource = books
                     .Select(b => new
                     {
@@ -251,6 +261,9 @@ namespace LibraryManagementSystem.Forms
 
         private async void BtnSearch_Click(object sender, EventArgs e)
         {
+            //if (string.IsNullOrEmpty(txtSearch.Text.Trim()) || string.IsNullOrWhiteSpace(txtSearch.Text.Trim())) {
+            //    MessageBox.Show("No Result.");
+            //}
             await LoadBooksAsync(txtSearch.Text.Trim());
         }
 
