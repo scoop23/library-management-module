@@ -13,7 +13,7 @@ namespace LibraryManagementSystem.Forms
         private DataGridView dgvBooks;
         private TextBox txtSearch;
         private ComboBox cmbCategory;
-        private Button btnSearch, btnAdd, btnEdit, btnDelete, btnArchive, btnCopies, btnRefresh, btnCategories, btnBorrow, btnReturn, btnClearance;
+        private Button btnSearch, btnAdd, btnEdit, btnDelete, btnArchive, btnUnarchive, btnCopies, btnRefresh, btnCategories, btnBorrow, btnReturn, btnClearance;
         private Label lblTitle;
 
         public BooksForm()  
@@ -96,35 +96,38 @@ namespace LibraryManagementSystem.Forms
                 BorderStyle = BorderStyle.FixedSingle
             };
 
-            btnAdd = new Button { Text = "Add Book", Location = new Point(10, 8), Width = 100, Height = 32, BackColor = Color.FromArgb(46, 139, 87), ForeColor = Color.White, FlatStyle = FlatStyle.Flat };
+            btnAdd = new Button { Text = "Add Book", Location = new Point(10, 10), Width = 100, Height = 30, BackColor = Color.FromArgb(46, 139, 87), ForeColor = Color.White, FlatStyle = FlatStyle.Flat };
             btnAdd.Click += BtnAdd_Click;
 
-            btnEdit = new Button { Text = "Edit", Location = new Point(120, 8), Width = 80, Height = 32, FlatStyle = FlatStyle.Flat };
+            btnEdit = new Button { Text = "Edit", Location = new Point(115, 10), Width = 70, Height = 30, FlatStyle = FlatStyle.Flat };
             btnEdit.Click += BtnEdit_Click;
 
-            btnCopies = new Button { Text = "Copies", Location = new Point(210, 8), Width = 80, Height = 32, FlatStyle = FlatStyle.Flat };
+            btnCopies = new Button { Text = "Copies", Location = new Point(190, 10), Width = 70, Height = 30, FlatStyle = FlatStyle.Flat };
             btnCopies.Click += BtnCopies_Click;
 
-            btnArchive = new Button { Text = "Archive", Location = new Point(310, 8), Width = 90, Height = 32, FlatStyle = FlatStyle.Flat };
+            btnArchive = new Button { Text = "Archive", Location = new Point(265, 10), Width = 75, Height = 30, FlatStyle = FlatStyle.Flat };
             btnArchive.Click += BtnArchive_Click;
 
-            btnDelete = new Button { Text = "Delete", Location = new Point(410, 8), Width = 90, Height = 32, BackColor = Color.FromArgb(178, 34, 34), ForeColor = Color.White, FlatStyle = FlatStyle.Flat };
+            btnUnarchive = new Button { Text = "Unarchive", Location = new Point(345, 10), Width = 85, Height = 30, FlatStyle = FlatStyle.Flat };
+            btnUnarchive.Click += BtnUnarchive_Click;
+
+            btnDelete = new Button { Text = "Delete", Location = new Point(435, 10), Width = 70, Height = 30, BackColor = Color.FromArgb(178, 34, 34), ForeColor = Color.White, FlatStyle = FlatStyle.Flat };
             btnDelete.Click += BtnDelete_Click;
 
-            var lblNav = new Label { Text = "Navigate:", Location = new Point(560, 14), Width = 65, Font = new Font("Segoe UI", 9, FontStyle.Bold), ForeColor = Color.Gray };
+            var lblNav = new Label { Text = "Navigate:", Location = new Point(515, 15), Width = 65, Font = new Font("Segoe UI", 9, FontStyle.Bold), ForeColor = Color.Gray };
 
-            btnBorrow = new Button { Text = "Borrow Book", Location = new Point(635, 8), Width = 110, Height = 32, BackColor = Color.FromArgb(46, 139, 87), ForeColor = Color.White, FlatStyle = FlatStyle.Flat };
+            btnBorrow = new Button { Text = "Borrow Book", Location = new Point(585, 10), Width = 105, Height = 30, BackColor = Color.FromArgb(46, 139, 87), ForeColor = Color.White, FlatStyle = FlatStyle.Flat };
             btnBorrow.Click += BtnBorrow_Click;
 
-            btnReturn = new Button { Text = "Return Book", Location = new Point(755, 8), Width = 110, Height = 32, BackColor = Color.FromArgb(21, 67, 140), ForeColor = Color.White, FlatStyle = FlatStyle.Flat };
+            btnReturn = new Button { Text = "Return Book", Location = new Point(695, 10), Width = 105, Height = 30, BackColor = Color.FromArgb(21, 67, 140), ForeColor = Color.White, FlatStyle = FlatStyle.Flat };
             btnReturn.Click += BtnReturn_Click;
 
-            btnClearance = new Button { Text = "Clearance", Location = new Point(875, 8), Width = 100, Height = 32, FlatStyle = FlatStyle.Flat };
+            btnClearance = new Button { Text = "Clearance", Location = new Point(805, 10), Width = 100, Height = 30, FlatStyle = FlatStyle.Flat };
             btnClearance.Click += BtnClearance_Click;
 
             pnlActions.Controls.AddRange(new Control[]
             {
-                btnAdd, btnEdit, btnCopies, btnArchive, btnDelete, lblNav, btnBorrow, btnReturn, btnClearance
+                btnAdd, btnEdit, btnCopies, btnArchive, btnUnarchive, btnDelete, lblNav, btnBorrow, btnReturn, btnClearance
             });
 
             Controls.AddRange(new Control[]
@@ -226,6 +229,16 @@ namespace LibraryManagementSystem.Forms
             catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
+        private async Task UnarchiveSelectedAsync()
+        {
+            var id = GetSelectedBookId();
+            if (id == null) { MessageBox.Show("Please select a book to unarchive."); return; }
+            if (MessageBox.Show("Unarchive this book? It will become available again.", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes) return;
+
+            try { await _bookService.UnarchiveBookAsync(id); await LoadBooksAsync(); }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+        }
+
         private async Task DeleteSelectedAsync()
         {
             var id = GetSelectedBookId();
@@ -274,6 +287,11 @@ namespace LibraryManagementSystem.Forms
         private async void BtnArchive_Click(object sender, EventArgs e)
         {
             await ArchiveSelectedAsync();
+        }
+
+        private async void BtnUnarchive_Click(object sender, EventArgs e)
+        {
+            await UnarchiveSelectedAsync();
         }
 
         private async void BtnDelete_Click(object sender, EventArgs e)

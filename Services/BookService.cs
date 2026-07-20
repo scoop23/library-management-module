@@ -35,7 +35,22 @@ namespace LibraryManagementSystem.Services
             book.CreatedAt = DateTime.UtcNow;
             book.UpdatedAt = DateTime.UtcNow;
 
-            return await _bookRepository.AddAsync(book);
+            var bookId = await _bookRepository.AddAsync(book);
+
+            var copyRepo = new BookCopyRepository();
+            for (int i = 0; i < book.TotalCopies; i++)
+            {
+                var copy = new BookCopy
+                {
+                    BookId = bookId,
+                    Condition = "New",
+                    Status = "Available",
+                    CreatedAt = DateTime.UtcNow
+                };
+                await copyRepo.AddAsync(copy);
+            }
+
+            return bookId;
         }
 
         public async Task UpdateBookAsync(Book book)
@@ -46,8 +61,45 @@ namespace LibraryManagementSystem.Services
             if (existing != null && existing.BookId != book.BookId)
                 throw new InvalidOperationException($"Another book already uses ISBN '{book.ISBN}'.");
 
+            var currentBook = await _bookRepository.GetByIdAsync(book.BookId);
+            var currentCopies = currentBook?.TotalCopies ?? 0;
+
             book.UpdatedAt = DateTime.UtcNow;
             await _bookRepository.UpdateAsync(book.BookId, book);
+
+            if (book.TotalCopies > currentCopies)
+            {
+                var copyRepo = new BookCopyRepository();
+                int toAdd = book.TotalCopies - currentCopies;
+                for (int i = 0; i < toAdd; i++)
+                {
+                    var copy = new BookCopy
+                    {
+                        BookId = book.BookId,
+                        Condition = "New",
+                        Status = "Available",
+                        CreatedAt = DateTime.UtcNow
+                    };
+                    await copyRepo.AddAsync(copy);
+                }
+                book.AvailableCopies += toAdd;
+                book.UpdatedAt = DateTime.UtcNow;
+                await _bookRepository.UpdateAsync(book.BookId, book);
+            }
+            else if (book.TotalCopies < currentCopies)
+            {
+                var copies = await _copyRepository.GetByBookIdAsync(book.BookId);
+                var available = copies.Where(c => c.Status == "Available").ToList();
+                int toRemove = Math.Min(currentCopies - book.TotalCopies, available.Count);
+                var copyRepo = new BookCopyRepository();
+                for (int i = 0; i < toRemove; i++)
+                {
+                    await copyRepo.DeleteAsync(available[i].CopyId);
+                }
+                book.AvailableCopies -= toRemove;
+                book.UpdatedAt = DateTime.UtcNow;
+                await _bookRepository.UpdateAsync(book.BookId, book);
+            }
         }
 
         public async Task DeleteBookAsync(string bookId)
@@ -69,6 +121,16 @@ namespace LibraryManagementSystem.Services
                 ?? throw new InvalidOperationException("Book not found.");
 
             book.Status = "Archived";
+            book.UpdatedAt = DateTime.UtcNow;
+            await _bookRepository.UpdateAsync(bookId, book);
+        }
+
+        public async Task UnarchiveBookAsync(string bookId)
+        {
+            var book = await _bookRepository.GetByIdAsync(bookId)
+                ?? throw new InvalidOperationException("Book not found.");
+
+            book.Status = "Available";
             book.UpdatedAt = DateTime.UtcNow;
             await _bookRepository.UpdateAsync(bookId, book);
         }

@@ -14,8 +14,9 @@ namespace LibraryManagementSystem.Forms
         private TextBox txtStudentNumber;
         private Button btnCheck, btnPrint, btnClose;
         private Label lblStudentInfo, lblStatus, lblStatusDetail;
-        private DataGridView dgvActiveBorrows;
-        private Panel pnlResult;
+        private DataGridView dgvActiveBorrows, dgvAllBorrows;
+        private Panel pnlResult, pnlBanner;
+        private Label lblBannerText;
 
         public ClearanceForm()
         {
@@ -25,8 +26,8 @@ namespace LibraryManagementSystem.Forms
         private void InitializeComponent()
         {
             Text = "Library Clearance";
-            Width = 720;
-            Height = 610;
+            Width = 820;
+            Height = 700;
             StartPosition = FormStartPosition.CenterParent;
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
@@ -52,22 +53,22 @@ namespace LibraryManagementSystem.Forms
 
             var pnlSearch = new Panel
             {
-                Location = new Point(20, 65),
-                Width = 670,
-                Height = 50,
+                Dock = DockStyle.Top,
+                Height = 55,
                 BackColor = Color.White,
-                BorderStyle = BorderStyle.FixedSingle
+                BorderStyle = BorderStyle.FixedSingle,
+                Padding = new Padding(10)
             };
 
-            var lblPrompt = new Label { Text = "Student Number:", Location = new Point(10, 14), Width = 110, Font = new Font("Segoe UI", 9) };
-            txtStudentNumber = new TextBox { Location = new Point(125, 10), Width = 280, PlaceholderText = "e.g. 26-00001" };
+            var lblPrompt = new Label { Text = "Student Number:", Location = new Point(12, 16), Width = 110, Font = new Font("Segoe UI", 9) };
+            txtStudentNumber = new TextBox { Location = new Point(127, 12), Width = 300, PlaceholderText = "e.g. 26-00001" };
 
             btnCheck = new Button
             {
                 Text = "Check Clearance",
-                Location = new Point(420, 8),
-                Width = 140,
-                Height = 30,
+                Location = new Point(445, 10),
+                Width = 150,
+                Height = 32,
                 BackColor = Color.FromArgb(21, 67, 140),
                 ForeColor = Color.White,
                 FlatStyle = FlatStyle.Flat
@@ -76,25 +77,78 @@ namespace LibraryManagementSystem.Forms
 
             pnlSearch.Controls.AddRange(new Control[] { lblPrompt, txtStudentNumber, btnCheck });
 
-            pnlResult = new Panel { Location = new Point(20, 130), Width = 670, Height = 370, Visible = false, BackColor = Color.White, BorderStyle = BorderStyle.FixedSingle };
+            pnlResult = new Panel
+            {
+                Dock = DockStyle.Fill,
+                Visible = false,
+                BackColor = Color.White,
+                BorderStyle = BorderStyle.FixedSingle,
+                Padding = new Padding(10),
+                AutoScroll = true
+            };
 
-            lblStudentInfo = new Label { Location = new Point(10, 10), Width = 650, Height = 500, Font = new Font("Segoe UI", 9) };
+            pnlBanner = new Panel
+            {
+                Location = new Point(10, 10),
+                Width = 760,
+                Height = 60,
+                BackColor = Color.FromArgb(46, 139, 87),
+                Visible = false
+            };
+
+            lblBannerText = new Label
+            {
+                Text = "CLEARED",
+                Font = new Font("Segoe UI", 22, FontStyle.Bold),
+                ForeColor = Color.White,
+                Dock = DockStyle.Fill,
+                TextAlign = ContentAlignment.MiddleCenter
+            };
+            pnlBanner.Controls.Add(lblBannerText);
+            pnlResult.Controls.Add(pnlBanner);
+
+            lblStudentInfo = new Label
+            {
+                Location = new Point(10, 80),
+                Width = 760,
+                Height = 55,
+                Font = new Font("Segoe UI", 9)
+            };
             pnlResult.Controls.Add(lblStudentInfo);
 
-            lblStatus = new Label { Location = new Point(10, 60), Width = 650, Font = new Font("Segoe UI", 14, FontStyle.Bold), AutoSize = true };
+            lblStatus = new Label
+            {
+                Location = new Point(10, 140),
+                Width = 760,
+                Font = new Font("Segoe UI", 14, FontStyle.Bold),
+                AutoSize = true
+            };
             pnlResult.Controls.Add(lblStatus);
 
-            lblStatusDetail = new Label { Location = new Point(10, 95), Width = 650, ForeColor = Color.Gray, Font = new Font("Segoe UI", 9) };
+            lblStatusDetail = new Label
+            {
+                Location = new Point(10, 175),
+                Width = 760,
+                ForeColor = Color.Gray,
+                Font = new Font("Segoe UI", 9)
+            };
             pnlResult.Controls.Add(lblStatusDetail);
 
-            var lblActiveHeader = new Label { Text = "Active Borrows:", Location = new Point(10, 130), Width = 200, Font = new Font("Segoe UI", 9, FontStyle.Bold) };
+            var lblActiveHeader = new Label
+            {
+                Text = "Active Borrows (Blocking Clearance):",
+                Location = new Point(10, 210),
+                Width = 400,
+                Font = new Font("Segoe UI", 9, FontStyle.Bold),
+                ForeColor = Color.FromArgb(178, 34, 34)
+            };
             pnlResult.Controls.Add(lblActiveHeader);
 
             dgvActiveBorrows = new DataGridView
             {
-                Location = new Point(10, 155),
-                Width = 650,
-                Height = 140,
+                Location = new Point(10, 235),
+                Width = 760,
+                Height = 120,
                 ReadOnly = true,
                 AllowUserToAddRows = false,
                 SelectionMode = DataGridViewSelectionMode.FullRowSelect,
@@ -105,12 +159,37 @@ namespace LibraryManagementSystem.Forms
             };
             pnlResult.Controls.Add(dgvActiveBorrows);
 
+            var lblAllHeader = new Label
+            {
+                Text = "All Borrow History:",
+                Location = new Point(10, 370),
+                Width = 400,
+                Font = new Font("Segoe UI", 9, FontStyle.Bold),
+                ForeColor = Color.FromArgb(21, 67, 140)
+            };
+            pnlResult.Controls.Add(lblAllHeader);
+
+            dgvAllBorrows = new DataGridView
+            {
+                Location = new Point(10, 395),
+                Width = 760,
+                Height = 160,
+                ReadOnly = true,
+                AllowUserToAddRows = false,
+                SelectionMode = DataGridViewSelectionMode.FullRowSelect,
+                MultiSelect = false,
+                AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill,
+                BackgroundColor = Color.White,
+                BorderStyle = BorderStyle.FixedSingle
+            };
+            pnlResult.Controls.Add(dgvAllBorrows);
+
             btnPrint = new Button
             {
                 Text = "Print Clearance",
-                Location = new Point(10, 318),
+                Location = new Point(10, 570),
                 Width = 150,
-                Height = 34,
+                Height = 36,
                 BackColor = Color.FromArgb(46, 139, 87),
                 ForeColor = Color.White,
                 FlatStyle = FlatStyle.Flat,
@@ -119,7 +198,14 @@ namespace LibraryManagementSystem.Forms
             btnPrint.Click += BtnPrint_Click;
             pnlResult.Controls.Add(btnPrint);
 
-            btnClose = new Button { Text = "Close", Dock = DockStyle.Bottom, Height = 45, FlatStyle = FlatStyle.Flat, DialogResult = DialogResult.OK };
+            btnClose = new Button
+            {
+                Text = "Close",
+                Dock = DockStyle.Bottom,
+                Height = 45,
+                FlatStyle = FlatStyle.Flat,
+                DialogResult = DialogResult.OK
+            };
 
             Controls.AddRange(new Control[] { pnlHeader, pnlSearch, pnlResult, btnClose });
             AcceptButton = btnCheck;
@@ -148,11 +234,12 @@ namespace LibraryManagementSystem.Forms
                 }
 
                 var activeBorrows = await _borrowService.GetActiveBorrowsByStudentAsync(student.StudentId);
+                var allBorrows = await _borrowService.GetBorrowsByStudentAsync(student.StudentId);
                 var existingClearance = await _studentService.GetClearanceAsync(student.StudentId);
                 var previousStatus = existingClearance?.Status ?? "Not Cleared";
 
                 pnlResult.Visible = true;
-                lblStudentInfo.Text = $"Student: {student.LastName}, {student.FirstName}\n" +
+                lblStudentInfo.Text = $"Student: {student.LastName}, {student.FirstName} {student.MiddleName}\n" +
                                        $"SrCode: {student.StudentId}  |  Program: {student.ProgramId}  |  Year: {student.YearLevel}\n" +
                                        $"Email: {student.Email}  |  Status: {student.Status}  |  Previous Clearance: {previousStatus}";
 
@@ -164,7 +251,10 @@ namespace LibraryManagementSystem.Forms
 
                 if (activeBorrows.Count == 0 && student.Status == "Active")
                 {
-                    lblStatus.Text = "CLEARED";
+                    pnlBanner.Visible = true;
+                    pnlBanner.BackColor = Color.FromArgb(46, 139, 87);
+                    lblBannerText.Text = "CLEARED";
+                    lblStatus.Text = "Status: CLEARED";
                     lblStatus.ForeColor = Color.FromArgb(46, 139, 87);
                     lblStatusDetail.Text = "No active borrows. Student is eligible for library clearance.";
                     btnPrint.Enabled = true;
@@ -172,16 +262,22 @@ namespace LibraryManagementSystem.Forms
                 }
                 else if (activeBorrows.Count > 0)
                 {
-                    lblStatus.Text = "NOT CLEARED";
-                    lblStatus.ForeColor = Color.FromArgb(178, 34, 34);
+                    pnlBanner.Visible = true;
+                    pnlBanner.BackColor = Color.FromArgb(178, 34, 34);
+                    lblBannerText.Text = "NOT CLEARED";
+                    lblStatus.Text = "Status: NOT CLEARED";
+                    lblStatus.ForeColor = Color.Red;
                     lblStatusDetail.Text = $"Student has {activeBorrows.Count} active borrow(s). All books must be returned before clearance.";
                     btnPrint.Enabled = false;
                     clearanceRecord.Status = "Not Cleared";
                 }
                 else
                 {
-                    lblStatus.Text = "NOT CLEARED";
-                    lblStatus.ForeColor = Color.FromArgb(178, 34, 34);
+                    pnlBanner.Visible = true;
+                    pnlBanner.BackColor = Color.FromArgb(178, 34, 34);
+                    lblBannerText.Text = "NOT CLEARED";
+                    lblStatus.Text = "Status: NOT CLEARED";
+                    lblStatus.ForeColor = Color.Red;
                     lblStatusDetail.Text = $"Student status is '{student.Status}'. Only active students can be cleared.";
                     btnPrint.Enabled = false;
                     clearanceRecord.Status = "Not Cleared";
@@ -195,6 +291,17 @@ namespace LibraryManagementSystem.Forms
                         b.BookTitle,
                         BorrowDate = b.BorrowDate.ToString("yyyy-MM-dd"),
                         DueDate = b.DueDate.ToString("yyyy-MM-dd"),
+                        b.Status
+                    })
+                    .ToList();
+
+                dgvAllBorrows.DataSource = allBorrows
+                    .Select(b => new
+                    {
+                        b.BookTitle,
+                        BorrowDate = b.BorrowDate.ToString("yyyy-MM-dd"),
+                        DueDate = b.DueDate.ToString("yyyy-MM-dd"),
+                        ReturnDate = b.ReturnDate?.ToString("yyyy-MM-dd") ?? "—",
                         b.Status
                     })
                     .ToList();
@@ -212,7 +319,6 @@ namespace LibraryManagementSystem.Forms
 
         private void BtnPrint_Click(object sender, EventArgs e)
         {
-            var studentNumber = txtStudentNumber.Text.Trim();
             var printDoc = new PrintDocument();
             printDoc.PrintPage += (s, pe) =>
             {
@@ -233,9 +339,9 @@ namespace LibraryManagementSystem.Forms
                 pe.Graphics.DrawString("─".PadRight(80, '─'), bodyFont, Brushes.Gray, new PointF(40, y));
                 y += 20;
 
-                pe.Graphics.DrawString("Status: CLEARED", headerFont, Brushes.Black, new PointF(40, y));
+                pe.Graphics.DrawString($"Status: {lblStatus.Text}", headerFont, Brushes.Black, new PointF(40, y));
                 y += 25;
-                pe.Graphics.DrawString("No outstanding library obligations.", bodyFont, Brushes.Black, new PointF(40, y));
+                pe.Graphics.DrawString(lblStatusDetail.Text, bodyFont, Brushes.Black, new PointF(40, y));
                 y += 40;
                 pe.Graphics.DrawString("─".PadRight(80, '─'), bodyFont, Brushes.Gray, new PointF(40, y));
                 y += 30;
