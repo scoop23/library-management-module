@@ -170,6 +170,7 @@ namespace LibraryManagementSystem.Forms
                         "Search Results",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Information);
+                    books = await _bookService.GetAllBooksAsync();
                 }
 
 
