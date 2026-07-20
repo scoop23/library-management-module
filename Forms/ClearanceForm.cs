@@ -27,7 +27,7 @@ namespace LibraryManagementSystem.Forms
         {
             Text = "Library Clearance";
             Width = 820;
-            Height = 700;
+            Height = 800;
             StartPosition = FormStartPosition.CenterParent;
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
@@ -83,15 +83,14 @@ namespace LibraryManagementSystem.Forms
                 Visible = false,
                 BackColor = Color.White,
                 BorderStyle = BorderStyle.FixedSingle,
-                Padding = new Padding(10),
                 AutoScroll = true
             };
 
             pnlBanner = new Panel
             {
-                Location = new Point(10, 10),
-                Width = 760,
-                Height = 60,
+                Location = new Point(15, 20),
+                Width = 740,
+                Height = 55,
                 BackColor = Color.FromArgb(46, 139, 87),
                 Visible = false
             };
@@ -99,7 +98,7 @@ namespace LibraryManagementSystem.Forms
             lblBannerText = new Label
             {
                 Text = "CLEARED",
-                Font = new Font("Segoe UI", 22, FontStyle.Bold),
+                Font = new Font("Segoe UI", 18, FontStyle.Bold),
                 ForeColor = Color.White,
                 Dock = DockStyle.Fill,
                 TextAlign = ContentAlignment.MiddleCenter
@@ -109,26 +108,27 @@ namespace LibraryManagementSystem.Forms
 
             lblStudentInfo = new Label
             {
-                Location = new Point(10, 80),
-                Width = 760,
-                Height = 55,
-                Font = new Font("Segoe UI", 9)
+                Location = new Point(15, 120),
+                Width = 740,
+                Height = 65,
+                Font = new Font("Segoe UI", 9),
+                BackColor = Color.FromArgb(240, 244, 250)
             };
             pnlResult.Controls.Add(lblStudentInfo);
 
             lblStatus = new Label
             {
-                Location = new Point(10, 140),
-                Width = 760,
-                Font = new Font("Segoe UI", 14, FontStyle.Bold),
+                Location = new Point(15, 200),
+                Width = 740,
+                Font = new Font("Segoe UI", 13, FontStyle.Bold),
                 AutoSize = true
             };
             pnlResult.Controls.Add(lblStatus);
 
             lblStatusDetail = new Label
             {
-                Location = new Point(10, 175),
-                Width = 760,
+                Location = new Point(15, 230),
+                Width = 740,
                 ForeColor = Color.Gray,
                 Font = new Font("Segoe UI", 9)
             };
@@ -137,7 +137,7 @@ namespace LibraryManagementSystem.Forms
             var lblActiveHeader = new Label
             {
                 Text = "Active Borrows (Blocking Clearance):",
-                Location = new Point(10, 210),
+                Location = new Point(15, 235),
                 Width = 400,
                 Font = new Font("Segoe UI", 9, FontStyle.Bold),
                 ForeColor = Color.FromArgb(178, 34, 34)
@@ -146,8 +146,8 @@ namespace LibraryManagementSystem.Forms
 
             dgvActiveBorrows = new DataGridView
             {
-                Location = new Point(10, 235),
-                Width = 760,
+                Location = new Point(15, 270),
+                Width = 740,
                 Height = 120,
                 ReadOnly = true,
                 AllowUserToAddRows = false,
@@ -162,7 +162,7 @@ namespace LibraryManagementSystem.Forms
             var lblAllHeader = new Label
             {
                 Text = "All Borrow History:",
-                Location = new Point(10, 370),
+                Location = new Point(15, 400),
                 Width = 400,
                 Font = new Font("Segoe UI", 9, FontStyle.Bold),
                 ForeColor = Color.FromArgb(21, 67, 140)
@@ -171,8 +171,8 @@ namespace LibraryManagementSystem.Forms
 
             dgvAllBorrows = new DataGridView
             {
-                Location = new Point(10, 395),
-                Width = 760,
+                Location = new Point(15, 435),
+                Width = 740,
                 Height = 160,
                 ReadOnly = true,
                 AllowUserToAddRows = false,
@@ -187,9 +187,9 @@ namespace LibraryManagementSystem.Forms
             btnPrint = new Button
             {
                 Text = "Print Clearance",
-                Location = new Point(10, 570),
+                Location = new Point(15, 620),
                 Width = 150,
-                Height = 36,
+                Height = 38,
                 BackColor = Color.FromArgb(46, 139, 87),
                 ForeColor = Color.White,
                 FlatStyle = FlatStyle.Flat,
