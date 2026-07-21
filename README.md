@@ -68,19 +68,3 @@ Administrator/Librarian roles in Firebase Auth).
   the parent Book
 - Category CRUD (needed for the category filter/picker)
 - Optional cover image upload to Firebase Storage on save
-
-## What's intentionally out of scope here
-
-- Barcode generation/printing (per your request)
-- Authentication/Dashboard/Borrowing/Return/Reservation/Fine/Reports forms and
-  the six external API services (Student/Teacher/Employee/Enrollment/
-  Registrar/Academic) — these plug into the same Repository/Service pattern
-  when you're ready to build them
-- PDF/Excel export, audit logging, toast notifications
-
-## Note on compiling
-
-This solution wasn't compiled in this environment (Windows Forms requires a
-Windows target and this was written on a Linux sandbox with no network access
-for NuGet restore). Build and run it in Visual Studio 2022 on Windows as
-described above.
